@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+
+<ImageView
+	android:id="@+id/widget32"
+	android:layout_width="176dp"
+	android:layout_height="176dp"
+/>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <TextView
+	android:id="@+id/text_account"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Account"
+/>
+
+    <EditText
+        android:id="@+id/edittext_account"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/text_account"
+        android:ems="10"
+        android:textSize="18sp" />
+    
+</RelativeLayout>
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+<TextView
+	android:id="@+id/text_password"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Password"
+ />
+
+<EditText
+    android:id="@+id/edittext_password"
+    android:layout_width="98dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="14dp"
+    android:layout_toRightOf="@+id/text_password"
+    android:ems="10"
+    android:textSize="18sp" />
+
+</RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="79dp"
+        android:text="永久登入" />
+
+</RelativeLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="14dp"
+    android:layout_toRightOf="@+id/button_noname"
+    android:gravity="center" >
+
+<Button
+	android:id="@+id/button_FBlogin"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="FB"
+ />
+<Button
+	android:id="@+id/button_login"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="&#30331;&#20837;"
+ />
+<Button
+	android:id="@+id/button_regist"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="&#35387;&#20874;"
+/>
+<Button
+	android:id="@+id/button_noname"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="&#21311;&#21517;&#30331;&#20837;"
+ />
+</LinearLayout>
+
+
+
+
+
+</LinearLayout>
+
+

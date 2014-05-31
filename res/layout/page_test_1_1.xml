@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity = "center"
+     >
+
+
+<TextView
+	android:id="@+id/textview_notice"
+	android:layout_width="match_parent"
+	android:layout_height="150dp"
+	android:layout_marginTop="30dp"
+	android:padding="30dp"
+	android:text="&#20351;&#29992;&#26289;&#21517;&#30331;&#20837;&#30340;&#35441;&#65292;&#23559;&#19981;&#26371;&#39023;&#31034;&#24744;&#30340;&#22995;&#21517;&#20294;&#26159;&#21482;&#33021;&#22238;&#31572;&#21839;&#38988;&#19981;&#33021;&#25552;&#20986;&#21839;&#38988;&#21938;!&#36996;&#26159;&#35531;&#22635;&#23531;&#24615;&#21029;&#36319;&#24180;&#32000;&#35613;&#35613;&#12290;"
+
+/>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+    <TextView
+	android:id="@+id/text_sex"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_alignParentTop="true"
+	android:layout_marginLeft="20dp"
+	android:text="&#24615;&#21029;:" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/text_sex"
+        android:ems="10" />
+
+</RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+<TextView
+	android:id="@+id/rext_age"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="&#24180;&#32000;:"
+	android:layout_alignParentTop="true"
+	android:layout_marginLeft="20dp"/>
+    
+<EditText
+    android:id="@+id/editText2"
+    android:layout_width="140dp"
+    android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/rext_age"
+    android:ems="10" />
+ 
+</RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+   <Button
+       android:id="@+id/button_noname_login"
+       android:layout_width="120dp"
+       android:layout_height="57dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+       android:text="匿名登入" />
+
+   <Button
+       android:id="@+id/button_login"
+       android:layout_width="120dp"
+       android:layout_height="57dp"
+       android:layout_alignParentTop="true"
+       android:layout_marginRight="20dp"
+       android:layout_toLeftOf="@+id/button_noname_login"
+       android:text="我要登入" />
+
+   </RelativeLayout>
+</LinearLayout>
+

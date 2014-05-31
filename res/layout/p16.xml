@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget0"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="blablabla of this Q" />
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q title here" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="starttime show here" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="finish time show here" />
+
+        <Gallery
+            android:id="@+id/gallery"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+        />
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="245dp" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="120dip"
+                    android:layout_height="40dip"
+                    android:text="全部的結果"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <fragment
+                    android:id="@+id/fragment_place"
+                    android:name="com.user_vote_pages.Fragment_BG"
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="120dip"
+                    android:layout_height="40dip"
+                    android:text="只有男生"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <fragment
+                    android:id="@+id/fragment_1"
+                    android:name="com.user_vote_pages.Fragment_B_only"
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="120dip"
+                    android:layout_height="40dip"
+                    android:text="只有女生"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <fragment
+                    android:id="@+id/fragment_2"
+                    android:name="com.user_vote_pages.Fragment_G_only"
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp" />
+
+                <ListView
+                    android:id="@+id/widget34"
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp" >
+                </ListView>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/button_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="view others" />
+
+            <Button
+                android:id="@+id/button_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="finish" />
+
+            <Button
+                android:id="@+id/button_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="delete" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ImageSwitcher
+            android:id="@+id/image_switcher"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ImageSwitcher>
+
+        <TextSwitcher
+            android:id="@+id/text_switcher"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </TextSwitcher>
+
+        <TextSwitcher
+            android:id="@+id/text_switcher1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </TextSwitcher>
+    </LinearLayout>
+
+</AbsoluteLayout>

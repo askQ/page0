@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="0,1"
+    >
+       <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+<Button
+	android:id="@+id/button_BG"
+	android:layout_width="70dp"
+	android:layout_height="72dp"
+	android:text="Boy heart Girl"
+	android:layout_x="64dp"
+	android:layout_y="80dp" />
+<Button
+	android:id="@+id/button_cloth"
+	android:layout_width="72dp"
+	android:layout_height="71dp"
+	android:text="Cloth"
+	android:layout_x="175dp"
+	android:layout_y="80dp" />
+  </TableRow>
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+<Button
+	android:id="@+id/button_3C"
+	android:layout_width="69dp"
+	android:layout_height="73dp"
+	android:text="3C"
+	android:layout_x="65dp"
+	android:layout_y="188dp" />
+
+
+ 
+        <Button
+	android:id="@+id/button_BG"
+	android:layout_width="70dp"
+	android:layout_height="72dp"
+	android:text="&#30007;&#22899;&#32004;&#26371;"/>
+  
+    </TableRow>
+       <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+<Button
+	android:id="@+id/button_3C"
+	android:layout_width="69dp"
+	android:layout_height="73dp"
+	android:text="3C"
+	android:layout_x="65dp"
+	android:layout_y="188dp" />
+
+
+ 
+        <Button
+	android:id="@+id/button_gather"
+	android:layout_width="70dp"
+	android:layout_height="72dp"
+	android:text="gathering~"/>
+  
+    </TableRow>
+     <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+<Button
+	android:id="@+id/button_eat"
+	android:layout_width="69dp"
+	android:layout_height="73dp"
+	android:text="EaT"
+	android:layout_x="65dp"
+	android:layout_y="188dp" />
+
+
+ 
+        <Button
+	android:id="@+id/button_live"
+	android:layout_width="70dp"
+	android:layout_height="72dp"
+	android:text="live"/>
+  
+    </TableRow>
+        <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+<Button
+	android:id="@+id/button_entertain"
+	android:layout_width="69dp"
+	android:layout_height="73dp"
+	android:text="entertain"
+	android:layout_x="65dp"
+	android:layout_y="188dp" />
+
+
+ 
+        <Button
+	android:id="@+id/button_makeup"
+	android:layout_width="70dp"
+	android:layout_height="72dp"
+	android:text="MAKEUP"/>
+  
+    </TableRow>
+        <TableRow
+        android:id="@+id/tableRow5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+<Button
+	android:id="@+id/button_gift"
+	android:layout_width="69dp"
+	android:layout_height="73dp"
+	android:text="Gift"
+	android:layout_x="65dp"
+	android:layout_y="188dp" />
+     <Button
+	android:id="@+id/button_sex"
+	android:layout_width="70dp"
+	android:layout_height="72dp"
+	android:text="SEXXX"/>
+
+
+  
+    </TableRow>
+   <TableRow
+        android:id="@+id/tableRow6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+<Button
+	android:id="@+id/button_other"
+	android:layout_width="69dp"
+	android:layout_height="73dp"
+	android:text="other"
+	android:layout_x="65dp"
+	android:layout_y="188dp" />
+
+
+ 
+
+  
+    </TableRow>
+
+</TableLayout>
+

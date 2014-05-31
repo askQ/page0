@@ -1,0 +1,43 @@
+<AbsoluteLayout
+	android:id="@+id/widget0"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drw_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Page4_MainActivity" >
+ 
+    <!-- Content -->
+ 
+</android.support.v4.widget.DrawerLayout>
+
+
+<LinearLayout
+    android:id="@+id/widget0"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+  
+<Button
+	android:id="@+id/button_ask"
+	android:layout_width="143dp"
+	android:layout_height="60dp"
+	android:text="ASk"
+/>
+<Button
+	android:id="@+id/button_howuse"
+	android:layout_width="33dp"
+	android:layout_height="35dp"
+	android:text="how"
+ />
+      <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView" />
+   
+</LinearLayout>
+
+</AbsoluteLayout>

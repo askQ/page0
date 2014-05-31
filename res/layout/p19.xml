@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+ <ScrollView
+android:layout_height="fill_parent"
+android:layout_width="fill_parent">
+<LinearLayout
+android:orientation="vertical"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent">
+<ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="27dp"
+        android:layout_y="144dp"
+         />
+    <TextView
+        android:id="@+id/textView_asker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="52dp"
+        android:layout_y="309dp"
+        android:text="starttime show here" />
+    <TextView
+	android:id="@+id/description"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="blablabla of this Q"
+	android:layout_x="62dp"
+	android:layout_y="56dp" />
+<TextView
+	android:id="@+id/Title"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Q title here"
+	android:layout_x="58dp"
+	android:layout_y="19dp" />
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="52dp"
+        android:layout_y="309dp"
+        android:text="finish time show here" />
+     <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="52dp"
+        android:layout_y="309dp"
+        android:text="starttime show here" />
+ 
+<Gallery
+     android:id="@+id/gallery"
+     android:layout_width="fill_parent"
+     android:layout_height="50dp" />
+ <ImageSwitcher
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_switcher"
+    />
+  <TextSwitcher
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_switcher"
+    />
+    <TextSwitcher
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_switcher1"
+    />
+<TextView
+            android:id="@+id/textView1"
+            android:layout_width="120dip"
+               			android:text="全部的結果"
+            android:layout_height="40dip"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+     <fragment
+        android:name="com.user_vote_pages.Fragment_BG"
+        android:id="@+id/fragment_place"
+   		android:layout_width="fill_parent"
+   		android:layout_height="50dp" />
+<TextView
+            android:id="@+id/textView2"
+            android:layout_width="120dip"
+            android:layout_height="40dip"
+               			android:text="只有男生"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+   <fragment
+       android:id="@+id/fragment_1"
+       android:name="com.user_vote_pages.Fragment_B_only"
+       android:layout_width="fill_parent"
+       android:layout_height="50dp" />
+<TextView
+            android:id="@+id/textView3"
+            android:layout_width="120dip"
+            android:layout_height="40dip"
+               			android:text="只有女生"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+   <fragment
+       android:id="@+id/fragment_2"
+       android:name="com.user_vote_pages.Fragment_G_only"
+       android:layout_width="fill_parent"
+       android:layout_height="50dp" />
+   
+    <ListView
+	android:id="@+id/widget34"
+	android:layout_width="fill_parent"
+       android:layout_height="200dp" 
+	/>
+    <TextView
+	android:id="@+id/text_review"
+	android:layout_width="120dip"
+     android:layout_height="40dip"
+	android:text="show review here"></TextView>
+	
+
+
+<Button
+	android:id="@+id/button_gohome"
+	android:layout_width="120dip"
+     android:layout_height="40dip"
+	android:text="回主業"
+	/>
+</LinearLayout>
+</ScrollView>
+</LinearLayout>
