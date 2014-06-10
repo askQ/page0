@@ -65,9 +65,9 @@ import android.widget.ViewSwitcher.ViewFactory;
 public class P19 extends Activity {
 	
 	Gallery gallery;
-	 TextView Title,Detail, finish_time,asker,start_time;
-	 ImageView photo;
-	 List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
+	TextView Title,Detail, finish_time,asker,start_time;
+	ImageView photo;
+	List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
 	Button button_out;
 	ImageSwitcher imageSwitcher;
 	TextSwitcher textswitcher,textswitcher1;

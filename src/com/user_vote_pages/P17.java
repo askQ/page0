@@ -59,9 +59,11 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 
 public class P17 extends Activity {
-	 List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
+	List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
+	ImageView person_photo;
 	Gallery gallery;
 	Button button;
+	TextView textView1,textView2,textView3;
 	SimpleAdapter simpleAdapter;
 	ImageSwitcher imageSwitcher;
 	TextSwitcher textswitcher,textswitcher1;
@@ -78,6 +80,15 @@ public class P17 extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_p17);
+		//person photo
+		person_photo= (ImageView) findViewById(R.id.imageView1);
+		//person_name
+		textView1= (TextView) findViewById(R.id.textView1);
+		textView1.setText("asker");
+		textView2= (TextView) findViewById(R.id.textView2);
+		textView2.setText("start time");
+		textView3= (TextView) findViewById(R.id.textView3);
+		textView3.setText("fivish time");
 		gallery = (Gallery) findViewById(R.id.gallery);
 
 		
@@ -89,10 +100,10 @@ public class P17 extends Activity {
 	            item.put("vote", "vote me");
 	            items.add(item);
 	        }
-	        String[] ContentItem = new String[] { "image","title", "click","vote" };
-	        int[] ViewID = new int[] {R.id.imageView_choice,R.id.textView_title,R.id.textView_detail,R.id.button1 };
+	     String[] ContentItem = new String[] { "image","title", "click","vote" };
+	     int[] ViewID = new int[] {R.id.imageView_choice,R.id.textView_title,R.id.textView_detail,R.id.button1 };
 	        
-	       simpleAdapter = new SimpleAdapter(this, 
+	      simpleAdapter = new SimpleAdapter(this, 
 	                items, R.layout.listview_for_p17, ContentItem,
 	                ViewID){
 				@Override
@@ -117,7 +128,7 @@ public class P17 extends Activity {
 	        };
 	        //in order to search whether is button or not
 	       
-	        gallery.setAdapter(simpleAdapter);
+	     gallery.setAdapter(simpleAdapter);
 		 gallery.setOnItemClickListener(new OnItemClickListener(){
 			          public void onItemClick(AdapterView parent, View view, int position, long id) {
 			        	  imageSwitcher.setImageResource(hot[position]);
