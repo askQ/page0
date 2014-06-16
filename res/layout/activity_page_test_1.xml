@@ -48,7 +48,10 @@
             android:layout_marginLeft="14dp"
             android:layout_toRightOf="@+id/text_password"
             android:ems="10"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:gravity="center"
+  			android:inputType="textPassword"
+   			android:password="true" />
     </RelativeLayout>
 
     <LinearLayout

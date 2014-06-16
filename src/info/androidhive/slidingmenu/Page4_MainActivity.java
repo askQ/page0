@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class Page4_MainActivity extends Activity {
@@ -60,6 +61,10 @@ public class Page4_MainActivity extends Activity {
 		
 		/*Danger start, wt code*/
 		View header=getLayoutInflater().inflate(R.layout.header,null);
+		ImageView asker_photo = (ImageView) header.findViewById(R.id.backgrd);
+		///set the asker's photo here
+		asker_photo.setImageAlpha(R.drawable.hot);
+		
 		mDrawerList.addHeaderView(header);
 	
 		header.setOnClickListener(new OnClickListener(){

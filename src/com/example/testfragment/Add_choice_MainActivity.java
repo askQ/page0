@@ -167,6 +167,7 @@ public class Add_choice_MainActivity extends Activity implements Comunicator {
 	@Override
 	public void save(String title, String detail,String uri_s_from ){
 		arrayList.add(new MyObject(title,detail,uri_s_from));
+	
 		Log.i("wwwwwwwww", uri_s_from);
 		//Toast.makeText(getApplicationContext(), uri_s_from, 1).show();
 		/*

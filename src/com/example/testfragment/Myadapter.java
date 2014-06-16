@@ -62,8 +62,14 @@ public class Myadapter extends BaseAdapter {
 		detail.setText(array.get(arg0).DetailFromEdittext);
 		//Bitmap bitmap = BitmapFactory.decodeFile(array.get(arg0).UriFroFramgnet);
 		//imageView.setImageBitmap(bitmap);
+		
 		Uri uri = Uri.parse(array.get(arg0).UriFroFramgnet);
-		imageView.setImageURI(uri);
+		if(uri!=null)
+			imageView.setImageURI(uri);
+		else
+			imageView.setVisibility(View.VISIBLE);
+
+			
 		Log.i("adapter is used!!!!!!","already!!!!!!!!!!!!!");
 		return view;
 		

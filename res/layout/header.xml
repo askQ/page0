@@ -8,7 +8,7 @@
         android:id="@+id/backgrd"
         android:layout_width="fill_parent"
         android:layout_height="190dp"
-        android:src="@drawable/ic_home"
+        
         android:scaleType="centerCrop"
 	 />
 

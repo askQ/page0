@@ -42,9 +42,9 @@ public class dialogFragment extends DialogFragment implements OnClickListener {
 	EditText editText1;
 	ImageView imageView;
 	Comunicator comunicator;
-	String selectedImagePath;
-	Uri selectedImageUri;
-	Uri mImageCaptureUri;
+	String selectedImagePath=null;
+	Uri selectedImageUri=null;
+	Uri mImageCaptureUri=null;
 	String mPath;
 	Bitmap bitmap = null;
 	@Override
@@ -121,10 +121,15 @@ public class dialogFragment extends DialogFragment implements OnClickListener {
 		case R.id.btnloadToListView:
 			comunicator.doSomeThing(editText.getText().toString(),editText1.getText().toString(),
 					selectedImageUri);
+			if(selectedImageUri.toString()==null){
 			comunicator.save(editText.getText().toString(),editText1.getText().toString(),
 					selectedImageUri.toString());//mImageCaptureUri
-		
-			dismiss();
+			}
+			else{
+				comunicator.save(editText.getText().toString(),editText1.getText().toString(),
+						selectedImageUri.toString());//mImageCaptureUri			dismiss();
+			}
+				
 			break;
 		default:
 			break;
