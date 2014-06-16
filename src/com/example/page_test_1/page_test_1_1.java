@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class page_test_1_1 extends Activity {
-	public Button button_noname_login,button_login;
+	public Button button_noname_login;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,14 +25,6 @@ public class page_test_1_1 extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent();
 				intent.setClass(page_test_1_1.this, Page4_MainActivity.class);
-				startActivity(intent); 
-			}}
-			);
-		button_login=(Button)findViewById(R.id.button_login);
-		button_login.setOnClickListener(new Button.OnClickListener(){
-			public void onClick(View arg0) {
-				Intent intent = new Intent();
-				intent.setClass(page_test_1_1.this, Page_test_1.class);
 				startActivity(intent); 
 			}}
 			);

@@ -1,11 +1,3 @@
-/*account is the string account
- * password is the string password
- * there is 4 button button_login,button_regist,button_FBlogin,button_noname
- * there is 2 checkbox login_forever and remember me, @ the button of this activity
- * is the listener to detect whether the checkbox is selected or not
- * 
- * */
-
 package com.example.page_test_1;
 
 import info.androidhive.slidingmenu.Page4_MainActivity;
@@ -16,29 +8,17 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Page_test_1 extends Activity {
-	CheckBox login_forever,remember_me;
 	public Button button_login,button_regist,button_FBlogin,button_noname;
 	public EditText edittext_account,edittext_password;
 	public TextView text;
-	String account,password;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_page_test_1);
-		
-		edittext_account=(EditText)findViewById(R.id.edittext_account);
-		edittext_password=(EditText)findViewById(R.id.edittext_password);
-		account=edittext_account.getText().toString();
-		password=edittext_password.getText().toString();
-		login_forever=(CheckBox)findViewById(R.id.checkBox1);
-		remember_me=(CheckBox)findViewById(R.id.checkBox2);
 		
 		//assign button
 		button_regist=(Button)findViewById(R.id.button_regist);
@@ -79,26 +59,4 @@ public class Page_test_1 extends Activity {
 		
 	}
 
-	private void checkboxlistener()
-	{
-	login_forever.setOnCheckedChangeListener(listener);
-	remember_me.setOnCheckedChangeListener(listener);
-	}
-	//監聽user 是否有選取
-	private CheckBox.OnCheckedChangeListener listener=new CheckBox.OnCheckedChangeListener()
-	{
-		public void onCheckedChanged(CompoundButton buttonView,boolean isChecked)
-		{
-			//如果user按下Man
-				if(login_forever.isChecked()==true)
-				{
-					
-				}
-				//如果user按下Woman
-				if(remember_me.isChecked()==true)
-				{
-						
-				}
-		}
-	};
 }
