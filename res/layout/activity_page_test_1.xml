@@ -43,17 +43,18 @@
 	android:layout_height="wrap_content"
 	android:text="Password"
  />
-
 <EditText
-    android:id="@+id/edittext_password"
-    android:layout_width="98dp"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_marginLeft="14dp"
-    android:layout_toRightOf="@+id/text_password"
-    android:ems="10"
-    android:textSize="18sp" />
-
+            android:id="@+id/edittext_password"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/text_password"
+            android:ems="10"
+            android:textSize="18sp"
+            android:gravity="center"
+  			android:inputType="textPassword"
+   			android:password="true" />
 </RelativeLayout>
 
 <RelativeLayout
