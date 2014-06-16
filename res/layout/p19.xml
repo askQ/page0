@@ -109,7 +109,12 @@ android:layout_height="fill_parent">
        android:name="com.user_vote_pages.Fragment_G_only"
        android:layout_width="fill_parent"
        android:layout_height="50dp" />
-
+   
+    <ListView
+	android:id="@+id/widget34"
+	android:layout_width="fill_parent"
+       android:layout_height="200dp" 
+	/>
     <TextView
 	android:id="@+id/text_review"
 	android:layout_width="120dip"
