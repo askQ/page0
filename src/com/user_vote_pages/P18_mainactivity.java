@@ -34,11 +34,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
@@ -56,9 +54,7 @@ import android.graphics.Color;
 
 public class P18_mainactivity extends Activity {
 	Gallery gallery;
-	ListView command_list;
-	EditText give_command;
-	List<Map<String, Object>> commands = new ArrayList<Map<String,Object>>();
+	
 	ImageSwitcher imageSwitcher;
 	TextSwitcher textswitcher,textswitcher1;
 	private int[] hot = {R.drawable.hot,R.drawable.hot,R.drawable.hot
@@ -69,17 +65,8 @@ public class P18_mainactivity extends Activity {
     private String[] detail = {
             "command","command2","command3"
     };
-    private int[] photo = {R.drawable.hot,R.drawable.hot,R.drawable.hot
-    };
-    private String[] name = {
-            "name1","name2","name3"
-    };
-    private String[] command = {
-            "command","command2","command3"
-    };
-    SimpleAdapter simpleAdapter,commandadapter;
+    SimpleAdapter simpleAdapter;
 	List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
@@ -109,27 +96,9 @@ public class P18_mainactivity extends Activity {
       			        	 textswitcher1.setText(detail[position]);
       			            }
       			        });
-/////
-      for (int i = 0; i < name.length; i++) {
-          Map<String, Object> item_command = new HashMap<String, Object>();
-          item_command.put("photo", photo[i]);
-          item_command.put("name", name[i]);
-          item_command.put("command", command[i]);
-     
-          commands.add(item_command);
-      }
-      String[] command_item = new String[] { "photo","name", "command" };
-      int[] command_ViewID = new int[] {R.id.imageView_photo,R.id.textView_name,R.id.textView_command};
-      
-      commandadapter = new SimpleAdapter(this, 
-              commands, R.layout.list_for_command, command_item,
-              command_ViewID);
-	
-      command_list = (ListView) findViewById(R.id.list_for_command);
-      command_list.setAdapter(commandadapter);
-////      		
-      imageSwitcher = (ImageSwitcher)findViewById(R.id.image_switcher);
-      imageSwitcher.setFactory(new ViewFactory(){
+      		
+      		imageSwitcher = (ImageSwitcher)findViewById(R.id.image_switcher);
+      		imageSwitcher.setFactory(new ViewFactory(){
       		    @Override
       		    public View makeView() {
       		        ImageView imageView = new ImageView(P18_mainactivity.this);
@@ -139,8 +108,8 @@ public class P18_mainactivity extends Activity {
       		        return imageView;
       		    }         
       		});
-      textswitcher = (TextSwitcher) findViewById(R.id.text_switcher);
-      textswitcher.setFactory(new ViewFactory(){
+      		textswitcher = (TextSwitcher) findViewById(R.id.text_switcher);
+      		textswitcher.setFactory(new ViewFactory(){
       		    @Override
       		    public View makeView() {
       		       TextView textView = new TextView(P18_mainactivity.this);
@@ -149,8 +118,8 @@ public class P18_mainactivity extends Activity {
       		        return textView;
       		    }         
       		});
-      textswitcher1 = (TextSwitcher) findViewById(R.id.text_switcher1);
-      textswitcher1.setFactory(new ViewFactory(){
+      		textswitcher1 = (TextSwitcher) findViewById(R.id.text_switcher1);
+      		textswitcher1.setFactory(new ViewFactory(){
       		    @Override
       		    public View makeView() {
       		       TextView textView = new TextView(P18_mainactivity.this);
@@ -159,14 +128,12 @@ public class P18_mainactivity extends Activity {
       		        return textView;
       		    }         
       		});
-      
-      textswitcher.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
-      textswitcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
-      textswitcher1.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
-      textswitcher1.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
-      imageSwitcher.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
-      imageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
-      
+      		textswitcher.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
+      		textswitcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
+      		textswitcher1.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
+      		textswitcher1.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
+      		imageSwitcher.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
+      	    imageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
       Button button_out = (Button)findViewById(R.id.button_gohome);
 		
 	    button_out.setOnClickListener(new Button.OnClickListener(){

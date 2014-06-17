@@ -8,13 +8,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
-        
-                <TextView
-            android:id="@+id/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Q title here" />
-        
 
         <TextView
             android:id="@+id/description"
@@ -22,6 +15,11 @@
             android:layout_height="wrap_content"
             android:text="blablabla of this Q" />
 
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q title here" />
 
         <TextView
             android:id="@+id/textView3"
@@ -34,30 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="finish time show here" />
-        
-         <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <ImageSwitcher
-            android:id="@+id/image_switcher"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-        </ImageSwitcher>
-
-        <TextSwitcher
-            android:id="@+id/text_switcher"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-        </TextSwitcher>
-
-        <TextSwitcher
-            android:id="@+id/text_switcher1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-        </TextSwitcher>
-    </LinearLayout>
 
         <Gallery
             android:id="@+id/gallery"
@@ -120,11 +94,7 @@
                 </ListView>
             </LinearLayout>
         </ScrollView>
-<ListView
-            android:id="@+id/list_for_command"
-            android:layout_width="fill_parent"
-            android:layout_height="100dp"
-        />
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
@@ -150,6 +120,28 @@
 
     </LinearLayout>
 
-   
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ImageSwitcher
+            android:id="@+id/image_switcher"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ImageSwitcher>
+
+        <TextSwitcher
+            android:id="@+id/text_switcher"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </TextSwitcher>
+
+        <TextSwitcher
+            android:id="@+id/text_switcher1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </TextSwitcher>
+    </LinearLayout>
 
 </AbsoluteLayout>

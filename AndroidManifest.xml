@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="info.androidhive.slidingmenu"
@@ -51,3 +52,58 @@
         <activity android:name="com.view_my_Q.P19"></activity>
          </application>
 </manifest>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="info.androidhive.slidingmenu"
+    android:versionCode="1"
+    android:versionName="1.0" >
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+         <activity
+            android:name="com.example.page_test_1.page0"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="info.androidhive.pagein.Into_slidemanu">
+        </activity>
+    
+         <activity
+            android:name="info.androidhive.slidingmenu.Page4_MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+       
+        <activity android:name="com.example.page_test_1.page_test_1_1"></activity>
+        <activity android:name="com.example.page_test_1.page_2_test"></activity>
+        <activity android:name="info.androidhive.slidingmenu.ChangePersondetail_1"></activity>
+        <activity android:name="info.androidhive.slidingmenu.ChangePersondetail"></activity>
+        <activity android:name="com.example.page_test_1.Page_test_1"></activity>
+        <activity android:name="com.example.page_test_1.page3"></activity>
+        <activity android:name="com.example.page_test_1.page3_1"></activity>
+        <activity android:name="com.example.page_test_1.page3_2"></activity>
+        <activity android:name="com.example.page_test_1.page3_3"></activity>
+        <activity android:name="com.example.testfragment.P13"></activity>
+        <activity android:name="com.example.testfragment.P15"></activity>
+        <activity android:name="com.example.testfragment.Add_choice_MainActivity"></activity>
+        <activity android:name="com.user_vote_pages.P17"></activity>
+        <activity android:name="com.user_vote_pages.P18_mainactivity"></activity>
+        <activity android:name="com.view_my_Q.MP16"></activity>
+        <activity android:name="com.view_my_Q.P9"></activity>
+        <activity android:name="com.view_my_Q.P19"></activity>
+         </application>
+</manifest>
+>>>>>>> FETCH_HEAD
