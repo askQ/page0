@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-     
-           >
-
-           <ImageView
-                      android:id="@+id/imageView_choice"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_alignParentLeft="true"
-                      android:layout_alignParentTop="true"
-                      android:layout_alignBottom="@+id/textView_context"
-            />
-
-           <TextView
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity = "center"
+>
+ <TextView
                 android:textColor="#0000ff"
                       android:id="@+id/textView_title"
                       android:layout_width="wrap_content"
@@ -35,15 +26,27 @@
                       android:text="PhoneNumber"
                       android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    
 
-<Button
-    android:id="@+id/button1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_toRightOf="@+id/textView_detail"
-   
-    android:clickable="true"
-    android:text="Button" />
+           <ImageView
+                      android:id="@+id/imageView_choice"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentLeft="true"
+                      android:layout_alignParentTop="true"
+                      android:layout_alignBottom="@+id/textView_context"
+            />
 
-</RelativeLayout>
+          
+		<Button
+  				  android:id="@+id/button1"
+   				 android:layout_width="wrap_content"
+   	 			android:layout_height="wrap_content"
+    			 android:layout_alignParentLeft="true"
+                      android:layout_alignParentTop="true" 
+    			 android:layout_alignBottom="@+id/imageView_choice"
+   				 android:clickable="true"
+     />
+
+
+</LinearLayout>

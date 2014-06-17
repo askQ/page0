@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-     
-           >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity = "center"
+>
 
-           <ImageView
-                      android:id="@+id/imageView_choice"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_alignParentLeft="true"
-                      android:layout_alignParentTop="true"
-                      android:layout_alignBottom="@+id/textView_context"
-            />
-
-           <TextView
+    		
+ <TextView
                 android:textColor="#0000ff"
                       android:id="@+id/textView_title"
                       android:layout_width="wrap_content"
@@ -34,7 +27,17 @@
                       android:layout_below="@+id/textView_name"
                       android:text="PhoneNumber"
                       android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+           <ImageView
+                      android:id="@+id/imageView_choice"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentLeft="true"
+                      android:layout_alignParentTop="true"
+                      android:layout_alignBottom="@+id/textView_context"
+            />
 
+          
 
 <Button
     android:id="@+id/button1"
@@ -44,4 +47,5 @@
     android:layout_toRightOf="@+id/textView_detail"
     android:text="choose this" />
 
-</RelativeLayout>
+
+</LinearLayout>
