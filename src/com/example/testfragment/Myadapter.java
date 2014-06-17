@@ -21,7 +21,7 @@ public class Myadapter extends BaseAdapter {
 
 	Context context;
 	ArrayList<MyObject> array;
-
+	String abc="abc";
 	public Myadapter(Context context, ArrayList<MyObject> arraylist) {
 		// TODO Auto-generated constructor stub
 
@@ -63,11 +63,11 @@ public class Myadapter extends BaseAdapter {
 		//Bitmap bitmap = BitmapFactory.decodeFile(array.get(arg0).UriFroFramgnet);
 		//imageView.setImageBitmap(bitmap);
 		
-		Uri uri = Uri.parse(array.get(arg0).UriFroFramgnet);
-		if(uri!=null)
+		
+			Uri uri = Uri.parse(array.get(arg0).UriFroFramgnet);
 			imageView.setImageURI(uri);
-		else
-			imageView.setVisibility(View.VISIBLE);
+		
+	
 
 			
 		Log.i("adapter is used!!!!!!","already!!!!!!!!!!!!!");

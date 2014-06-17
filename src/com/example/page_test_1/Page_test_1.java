@@ -23,6 +23,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+//test fuck you!!!
+//fuck you again!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 public class Page_test_1 extends Activity {
 	CheckBox login_forever,remember_me;
 	public Button button_login,button_regist,button_FBlogin,button_noname;

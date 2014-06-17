@@ -46,6 +46,7 @@ public class dialogFragment extends DialogFragment implements OnClickListener {
 	Uri selectedImageUri=null;
 	Uri mImageCaptureUri=null;
 	String mPath;
+	String abc="abc";
 	Bitmap bitmap = null;
 	@Override
 	public void onAttach(Activity activity) {
@@ -121,15 +122,16 @@ public class dialogFragment extends DialogFragment implements OnClickListener {
 		case R.id.btnloadToListView:
 			comunicator.doSomeThing(editText.getText().toString(),editText1.getText().toString(),
 					selectedImageUri);
-			if(selectedImageUri.toString()==null){
+			if(selectedImageUri==null){
 			comunicator.save(editText.getText().toString(),editText1.getText().toString(),
-					selectedImageUri.toString());//mImageCaptureUri
+					abc);//mImageCaptureUri
 			}
 			else{
 				comunicator.save(editText.getText().toString(),editText1.getText().toString(),
-						selectedImageUri.toString());//mImageCaptureUri			dismiss();
-			}
+						selectedImageUri.toString());//mImageCaptureUri	
 				
+			}
+			dismiss();
 			break;
 		default:
 			break;
