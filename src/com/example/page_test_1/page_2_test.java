@@ -5,6 +5,8 @@ import info.androidhive.slidingmenu.R;
 import java.io.FileNotFoundException;
 import java.util.Calendar;
 
+import com.example.page_test_1.Page_test_1.AsteriskPasswordTransformationMethod;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -18,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
+import android.text.method.PasswordTransformationMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,6 +54,8 @@ public class page_2_test extends Activity
       AskerAccount=(EditText)findViewById(R.id.editText_account);
       Askerpassword=(EditText)findViewById(R.id.editText_password);
       Askerpassword2=(EditText)findViewById(R.id.editText_password_2);
+      Askerpassword.setTransformationMethod(new AsteriskPasswordTransformationMethod());
+      Askerpassword2.setTransformationMethod(new AsteriskPasswordTransformationMethod());
 ////it isi for birthday!!      
       calendar = Calendar.getInstance();
       mYear = calendar.get(Calendar.YEAR);
@@ -222,6 +227,29 @@ public class page_2_test extends Activity
        + String.valueOf(monthOfYear + 1) + "-"
        + String.valueOf(dayOfMonth);
    }
+ //this func is to set the password edittext to show in ****
+ 	public class AsteriskPasswordTransformationMethod extends PasswordTransformationMethod {
+ 	    @Override
+ 	    public CharSequence getTransformation(CharSequence source, View view) {
+ 	        return new PasswordCharSequence(source);
+ 	    }
+
+ 	    private class PasswordCharSequence implements CharSequence {
+ 	        private CharSequence mSource;
+ 	        public PasswordCharSequence(CharSequence source) {
+ 	            mSource = source; // Store char sequence
+ 	        }
+ 	        public char charAt(int index) {
+ 	            return '*'; // This is the important part
+ 	        }
+ 	        public int length() {
+ 	            return mSource.length(); // Return default
+ 	        }
+ 	        public CharSequence subSequence(int start, int end) {
+ 	            return mSource.subSequence(start, end); // Return default
+ 	        }
+ 	    }
+ 	};
 }
 
 
