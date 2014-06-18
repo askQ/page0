@@ -63,10 +63,9 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 
 public class P19 extends Activity {
-	
 	ListView command_list;
 	Gallery gallery;
-	TextView Title,Detail, finish_time,asker,start_time;
+	TextView Title,Detail, finish_time,asker,start_time,text_review;
 	ImageView photo;
 	List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
 	List<Map<String, Object>> commands = new ArrayList<Map<String,Object>>();
@@ -83,11 +82,11 @@ public class P19 extends Activity {
 				"detail1","detail2","detail3"
 	};
 	private String[] name = {
-            "name1","name2","name3"
-    };
-    private String[] command = {
-            "command","command2","command3"
-    };
+	            "name1","name2","name3"
+	    };
+	private String[] command = {
+	            "command","command2","command3"
+	    };
 	int  choose=1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,17 +94,36 @@ public class P19 extends Activity {
 		setContentView(R.layout.p19);
 		
 
-		asker = (TextView) findViewById(R.id.textView1);
+		asker = (TextView) findViewById(R.id.textView_asker);
 		asker.setText("asker show here");
-		start_time = (TextView) findViewById(R.id.textView3);
+		start_time = (TextView) findViewById(R.id.textView5);
 		start_time.setText("start time show here");
-		finish_time = (TextView) findViewById(R.id.textView2);
+		finish_time = (TextView) findViewById(R.id.textView7);
 		finish_time.setText("finish time show here");
 		Title = (TextView) findViewById(R.id.Title);
 		Title.setText("Title show here");
 		Detail = (TextView) findViewById(R.id.description);
 		Detail.setText("description show here");
-		
+		text_review= (TextView) findViewById(R.id.text_review);
+		text_review.setText("review ot asker show here");
+////
+		for (int i = 0; i < name.length; i++) {
+			            Map<String, Object> item_command = new HashMap<String, Object>();
+			           
+			            item_command.put("name", name[i]);
+			            item_command.put("command", command[i]);
+			       
+			            commands.add(item_command);
+			        }
+		String[] command_item = new String[] {"name", "command" };
+		int[] command_ViewID = new int[] {R.id.textView_name,R.id.textView_command};
+			        
+			 commandadapter = new SimpleAdapter(this,commands, R.layout.listview_command, command_item,
+			                command_ViewID);
+				
+				command_list = (ListView) findViewById(R.id.list_for_command);
+				command_list.setAdapter(commandadapter);
+////				
 		photo=(ImageView)findViewById(R.id.imageView1);
 		//photo.setimage.....
 		  for (int i = 0; i < title.length; i++) {
@@ -134,25 +152,6 @@ public class P19 extends Activity {
 			            }
 			        });*/
 		
-////
-		for (int i = 0; i < name.length; i++) {
-		           Map<String, Object> item_command = new HashMap<String, Object>();
-		           
-		           item_command.put("name", name[i]);
-		           item_command.put("command", command[i]);
-		      
-		           commands.add(item_command);
-		        }
-		String[] command_item = new String[] {"name", "command" };
-		int[] command_ViewID = new int[] {R.id.textView_name,R.id.textView_command};
-		        
-		commandadapter = new SimpleAdapter(this,commands, R.layout.listview_command, command_item,
-		                command_ViewID);
-			
-		command_list = (ListView) findViewById(R.id.list_for_command);
-		command_list.setAdapter(commandadapter);
-////			
-			
 		imageSwitcher = (ImageSwitcher)findViewById(R.id.image_switcher);
 		imageSwitcher.setFactory(new ViewFactory(){
 		    @Override
