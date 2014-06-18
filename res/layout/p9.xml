@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout
-	android:id="@+id/widget0"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+ <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="500dp" >
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+    
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="blablabla of this Q" />
+       
 
         <TextView
             android:id="@+id/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Q title here" />
+        
+         <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="blablabla of this Q" />
 
         <TextView
             android:id="@+id/textView3"
@@ -41,13 +50,35 @@
             android:ems="10"
             android:text="what i think  after i choose this item" >
 
-            <requestFocus />
+            <requestFocus/>
         </EditText>
-<ListView
-            android:id="@+id/list_for_command"
-            android:layout_width="fill_parent"
-            android:layout_height="100dp"
-        />
+
+        
+        <LinearLayout
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="vertical" >
+
+     <ImageSwitcher
+         android:id="@+id/image_switcher"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content" >
+     </ImageSwitcher>
+
+     <TextSwitcher
+         android:id="@+id/text_switcher"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content" >
+     </TextSwitcher>
+
+     <TextSwitcher
+         android:id="@+id/text_switcher1"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content" >
+     </TextSwitcher>
+	
+ </LinearLayout>
+ 
         <Gallery
             android:id="@+id/gallery"
             android:layout_width="fill_parent"
@@ -118,37 +149,25 @@
             </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:id="@+id/button_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="view others" />
+
 
     </LinearLayout>
 
- <LinearLayout
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:orientation="vertical" >
-
-     <ImageSwitcher
-         android:id="@+id/image_switcher"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content" >
-     </ImageSwitcher>
-
-     <TextSwitcher
-         android:id="@+id/text_switcher"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content" >
-     </TextSwitcher>
-
-     <TextSwitcher
-         android:id="@+id/text_switcher1"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content" >
-     </TextSwitcher>
-
- </LinearLayout>
  
-</AbsoluteLayout>
+ 
+ 	<ListView
+            android:id="@+id/list_for_command"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+        />
+ 	        <Button
+            android:id="@+id/button_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send it, gonna over this Q" />
+ 	
+              </LinearLayout>
+        </ScrollView>
+  
+ 	        
+</LinearLayout>
