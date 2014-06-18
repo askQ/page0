@@ -10,15 +10,11 @@ android:layout_width="fill_parent">
 android:orientation="vertical"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent">
-<ListView
-            android:id="@+id/list_for_command"
-            android:layout_width="fill_parent"
-            android:layout_height="100dp"
-        />
+
 <Gallery
      android:id="@+id/gallery"
      android:layout_width="200dp"
-     android:layout_height="50dp" />
+     android:layout_height="100dp" />
  <ImageSwitcher
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -70,8 +66,16 @@ android:layout_height="fill_parent">
        android:name="com.user_vote_pages.Fragment_G_only"
        android:layout_width="fill_parent"
        android:layout_height="50dp" />
-   
-   
+   <TextView
+	android:id="@+id/text_givecommand"
+	android:layout_width="120dip"
+     android:layout_height="40dip"
+	android:text="other people command"></TextView>
+   <ListView
+            android:id="@+id/list_for_command"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+        />
     <TextView
 	android:id="@+id/text_givecommand"
 	android:layout_width="120dip"
