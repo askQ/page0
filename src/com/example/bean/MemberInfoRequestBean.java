@@ -5,7 +5,7 @@ public class MemberInfoRequestBean extends AuthRequestBean {
 	private String name ;
 	private String sex ;
 	private String email ;
-	private String brithtime ;
+	private String birthtime ;
 	private String pic ;
 	private String extension ;
 	
@@ -27,11 +27,11 @@ public class MemberInfoRequestBean extends AuthRequestBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getBrithtime() {
-		return brithtime;
+	public String getBirthtime() {
+		return birthtime;
 	}
-	public void setBrithtime(String brithtime) {
-		this.brithtime = brithtime;
+	public void setBirthtime(String brithtime) {
+		this.birthtime = brithtime;
 	}
 	public String getPic() {
 		return pic;
