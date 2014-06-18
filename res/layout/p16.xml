@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget0"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity = "center"
+     >
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="500dp"
+                android:orientation="vertical" >
         
         <TextView
             android:id="@+id/Title"
@@ -58,22 +68,18 @@
             android:layout_height="wrap_content" >
         </TextSwitcher>
     </LinearLayout>
-
+		<TextView
+        	android:id="@+id/textView_show"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="click shoice to view larger" />
         <Gallery
             android:id="@+id/gallery"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
         />
 
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="245dp" >
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical" >
-
+       
                 <TextView
                     android:id="@+id/textView1"
                     android:layout_width="120dip"
@@ -113,18 +119,21 @@
                     android:layout_width="fill_parent"
                     android:layout_height="150dp" />
 
-                <ListView
-                    android:id="@+id/widget34"
-                    android:layout_width="fill_parent"
-                    android:layout_height="200dp" >
-                </ListView>
-            </LinearLayout>
-        </ScrollView>
-<ListView
+                
+            <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="show other's command"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        
+		<ListView
             android:id="@+id/list_for_command"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
         />
+		
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
@@ -146,10 +155,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="delete" />
+            
         </LinearLayout>
-
+		</LinearLayout>
+       </ScrollView>
     </LinearLayout>
 
+</LinearLayout>
    
-
-</AbsoluteLayout>

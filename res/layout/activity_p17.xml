@@ -1,23 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout
-	android:id="@+id/widget0"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android">
-<TextView
-	android:id="@+id/description"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:text="blablabla of this Q"
-	android:layout_x="62dp"
-	android:layout_y="56dp" />
-<TextView
-	android:id="@+id/Title"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:text="Q title here"
-	android:layout_x="58dp"
-	android:layout_y="19dp" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity = "center"
+     >
+
+     <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="500dp"
+                android:orientation="vertical" >
+        
+	 <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+            
+		
+    	<ImageView
+       		 android:id="@+id/imageView1"
+        	android:layout_width="wrap_content"
+      	  	android:layout_height="wrap_content"
+        	android:src="@drawable/bgtoggle" />
+        <TextView
+        	android:id="@+id/textView1"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="asker" />
+    	
+        </LinearLayout>
+    <TextView
+		android:id="@+id/Title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Q title here"
+		android:layout_x="58dp"
+		android:layout_y="19dp" />
+	<TextView
+		android:id="@+id/description"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="blablabla of this Q"
+		android:layout_x="62dp"
+		android:layout_y="56dp" />
+	
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="52dp"
+        android:layout_y="309dp"
+        android:text="start time show here" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="52dp"
+        android:layout_y="309dp"
+        android:text="finish time show here" />
+
 
  <Button
      android:id="@+id/button_out"
@@ -27,14 +71,7 @@
      android:layout_y="246dp"
      android:text="view the result" />
 
- <Gallery
-     android:id="@+id/gallery"
-     android:layout_width="200dp"
-     android:layout_height="50dp"
-     android:layout_marginLeft="21dp"
-     android:layout_marginTop="500dp"
-     android:layout_x="2dp"
-     android:layout_y="136dp" />
+
  <ImageSwitcher
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -50,35 +87,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/text_switcher1"
     />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="36dp"
-        android:layout_y="215dp"
-        android:text="asker" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="27dp"
-        android:layout_y="144dp"
-        android:src="@drawable/bgtoggle" />
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="52dp"
-        android:layout_y="309dp"
-        android:text="starttime show here" />
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="52dp"
-        android:layout_y="309dp"
-        android:text="finish time show here" />
- 
-</AbsoluteLayout>
+<TextView
+        	android:id="@+id/textView_show"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="click shoice to view larger" />
+     <Gallery
+     android:id="@+id/gallery"
+     android:layout_width="wrap_content"
+     android:layout_height="100dp"
+      />
+  
+</LinearLayout>
+       </ScrollView>
+       
+</LinearLayout>

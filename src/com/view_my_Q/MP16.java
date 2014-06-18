@@ -65,10 +65,10 @@ public class MP16 extends Activity {
 	private int[] hot = {R.drawable.hot,R.drawable.hot,R.drawable.hot
     };
     private String[] title = {
-            "name1","name2","name3"
+            "1choice_title","2choice_title","3choice_title"
     };
     private String[] detail = {
-            "command","command2","command3"
+            "1choice_detail","2_choice_detail","3_choice_detail"
     };
    
     private String[] name = {

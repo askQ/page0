@@ -4,16 +4,75 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity = "center"
-     >
+>
+        <TextView
+            
+            android:id="@+id/textView_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="account" />
 
+        <EditText
+            android:id="@+id/editText_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+          
+            android:ems="10"
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
+
+
+        <TextView
+            android:id="@+id/textView_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="password" />
+
+        <EditText
+            android:id="@+id/editText_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+          
+            android:ems="10"
+            android:inputType="textPersonName" >
+            
+                        <requestFocus />
+        </EditText>
+        <TextView
+            android:id="@+id/textView_password_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="password check" />
+
+        <EditText
+            android:id="@+id/editText_password_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+          
+            android:ems="10"
+            android:inputType="textPersonName" >
+            
+                        <requestFocus />
+        </EditText>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity = "center" 
+ 
         >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -21,7 +80,7 @@
             android:text="姓名" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/name_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -37,33 +96,43 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        android:gravity = "center">
+       >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/birth_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="生日" />
+        
+        <TextView
+    	android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          android:layout_toRightOf="@+id/birth_text"
+          
+            android:layout_alignParentTop="true"
+            android:text="生日"
+	    android:id="@+id/dateText"
+    />
 
-        <EditText
-            android:id="@+id/editText2"
+        <Button
+            android:id="@+id/button_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textView1"
-            android:ems="10"
-            android:inputType="date" />
+            android:layout_toRightOf="@+id/dateText"
+            android:ems="3"
+            android:inputType="date"
+            android:text="Date" />
 
     </RelativeLayout>
         <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        android:gravity = "center">
+      >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/PersonName_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -71,11 +140,11 @@
             android:text="email" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/PersonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textView1"
+            android:layout_toRightOf="@+id/PersonName_text"
             android:ems="10"
             android:inputType="textPersonName" >
 
@@ -86,27 +155,23 @@
         <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity = "center" >
+     >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="性別" />
 
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textView1"
-            android:ems="10"
-            android:inputType="textPersonName" >
-
-            <requestFocus />
-        </EditText>
+        <Spinner
+        android:id="@+id/spinnner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/sex"
+        >
+    </Spinner>
 
     </RelativeLayout>
 
@@ -115,7 +180,7 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/pic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -128,12 +193,12 @@
     <ImageView 
     android:id="@+id/img"
     android:layout_width="match_parent"
-    android:layout_height="200dip"    
+    android:layout_height="50dip"    
     />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity = "center" >
+      >
 
     <Button
     android:id="@+id/camera"

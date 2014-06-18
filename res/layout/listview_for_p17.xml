@@ -43,6 +43,7 @@
    				 android:layout_width="wrap_content"
    	 			android:layout_height="wrap_content"
     			 android:layout_alignParentLeft="true"
+    			 android:text="vote"
                       android:layout_alignParentTop="true" 
     			 android:layout_alignBottom="@+id/imageView_choice"
    				 android:clickable="true"

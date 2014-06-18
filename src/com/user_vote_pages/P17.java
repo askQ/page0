@@ -11,7 +11,7 @@
  * Title is the textview to show title oF Q
  * Detail is the textview to show detail of Q
  * asker show the asker name is textview
- * finish_time show the finish time
+ * finishtime show the finish time
  * starttime show the ask time
  * 
  * photo is a imageview show asker's photo ,to use it by (photo.setimage.....)
@@ -59,9 +59,11 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 
 public class P17 extends Activity {
-	 List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
+	List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
+	ImageView person_photo;
 	Gallery gallery;
 	Button button;
+	TextView asker,fivishtime,starttime;
 	SimpleAdapter simpleAdapter;
 	ImageSwitcher imageSwitcher;
 	TextSwitcher textswitcher,textswitcher1;
@@ -78,6 +80,15 @@ public class P17 extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_p17);
+		//person photo
+		person_photo= (ImageView) findViewById(R.id.imageView1);
+		//person_name
+		asker= (TextView) findViewById(R.id.textView1);
+		asker.setText("asker");
+		starttime= (TextView) findViewById(R.id.textView2);
+		starttime.setText("start time");
+		fivishtime= (TextView) findViewById(R.id.textView3);
+		fivishtime.setText("fivish time");
 		gallery = (Gallery) findViewById(R.id.gallery);
 
 		
@@ -89,10 +100,10 @@ public class P17 extends Activity {
 	            item.put("vote", "vote me");
 	            items.add(item);
 	        }
-	        String[] ContentItem = new String[] { "image","title", "click","vote" };
-	        int[] ViewID = new int[] {R.id.imageView_choice,R.id.textView_title,R.id.textView_detail,R.id.button1 };
+	     String[] ContentItem = new String[] { "image","title", "click","vote" };
+	     int[] ViewID = new int[] {R.id.imageView_choice,R.id.textView_title,R.id.textView_detail,R.id.button1 };
 	        
-	       simpleAdapter = new SimpleAdapter(this, 
+	      simpleAdapter = new SimpleAdapter(this, 
 	                items, R.layout.listview_for_p17, ContentItem,
 	                ViewID){
 				@Override
@@ -117,7 +128,7 @@ public class P17 extends Activity {
 	        };
 	        //in order to search whether is button or not
 	       
-	        gallery.setAdapter(simpleAdapter);
+	     gallery.setAdapter(simpleAdapter);
 		 gallery.setOnItemClickListener(new OnItemClickListener(){
 			          public void onItemClick(AdapterView parent, View view, int position, long id) {
 			        	  imageSwitcher.setImageResource(hot[position]);
