@@ -174,7 +174,7 @@ public class P9 extends Activity {
 		    int[] command_ViewID = new int[] {R.id.textView_name,R.id.textView_command};
 		        
 		    commandadapter = new SimpleAdapter(this, 
-		                commands, R.layout.list_for_command, command_item,
+		                commands, R.layout.listview_command, command_item,
 		                command_ViewID);
 			
 			command_list = (ListView) findViewById(R.id.list_for_command);
