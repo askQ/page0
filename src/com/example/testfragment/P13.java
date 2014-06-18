@@ -26,7 +26,9 @@ public class P13 extends Activity{
 	                        tButton_entertain,tButton_live;
 	EditText editText,editText1;	
 	TextView dateText ;
-	private int mYear, mMonth, mDay;
+	private int mYear;
+	private int mMonth;
+	private int mDay;
 	private DatePickerDialog datePickerDialog;
 	TextView tv_date,tv_cloth,tv_b,tv_g,tv_bg,tv_3c,tv_gather,tv_makeup,tv_other,tv_gift,tv_sex,
 					tv_eat,tv_live,tv_entertain;
@@ -37,9 +39,14 @@ public class P13 extends Activity{
 		setContentView(R.layout.ask_btn);
 		editText = (EditText)findViewById(R.id.editText1);
 		editText1 = (EditText)findViewById(R.id.editText2);
-	
+		dateText = (TextView)findViewById(R.id.dateText);
 		tv_date=(TextView)findViewById(R.id.textView3);
 		tv_date.setText("is type consider to boy and girl?");
+		Calendar calendar = Calendar.getInstance();
+		mYear = calendar.get(Calendar.YEAR);
+		mMonth = calendar.get(Calendar.MONTH);
+		mDay = calendar.get(Calendar.DAY_OF_MONTH);
+		dateText.setText(setDateFormat(mYear,mMonth,mDay+7)); 
 		tButton = (ToggleButton) findViewById(R.id.toggleButton1);
 		tButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 		@Override
@@ -246,12 +253,9 @@ public class P13 extends Activity{
 		tv_bg=(TextView)findViewById(R.id.textView7);
 	
 		tv_bg.setText("if you choose either B and G then we ask both 4 you");
-		Calendar calendar = Calendar.getInstance();
-		mYear = calendar.get(Calendar.YEAR);
-		mMonth = calendar.get(Calendar.MONTH);
-		mDay = calendar.get(Calendar.DAY_OF_MONTH);
+		
      
-		dateText = (TextView)findViewById(R.id.dateText);
+		
 		Button dateButton = (Button)findViewById(R.id.dateButton);
 		dateButton.setOnClickListener(new OnClickListener(){
 			@Override
@@ -327,7 +331,7 @@ public class P13 extends Activity{
 				mYear = year;
 				mMonth = month;
 				mDay = day;
-				dateText.setText("所以你他媽是要再"+setDateFormat(year,month,day)+"結束就對了"); 
+				dateText.setText(setDateFormat(year,month,day)); 
 			}
         
 		}, mYear,mMonth, mDay);
@@ -336,8 +340,8 @@ public class P13 extends Activity{
 	}
 
 	private String setDateFormat(int year,int monthOfYear,int dayOfMonth){
-		return String.valueOf(year) + "-"
-				+ String.valueOf(monthOfYear + 1) + "-"
+		return String.valueOf(year) + "/"
+				+ String.valueOf(monthOfYear + 1) + "/"
 				+ String.valueOf(dayOfMonth);
 	}
 }
