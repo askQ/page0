@@ -138,6 +138,9 @@ public class P9 extends Activity {
 						public void onClick(View arg0) {
 							// TODO Auto-generated method stub
 							choose=position;
+							imageSwitcher.setImageResource(hot[choose]);
+				          	 textswitcher.setText(title[choose]);
+				        	 textswitcher1.setText(detail[choose]);
 							Toast.makeText(getApplicationContext(),"final i choose "+position, 1).show();
 						}
 			        });
@@ -146,6 +149,7 @@ public class P9 extends Activity {
 	        	
 	        };
 		 gallery.setAdapter(simpleAdapter);
+		 /*
 		 gallery.setOnItemClickListener(new OnItemClickListener(){
 			          public void onItemClick(AdapterView parent, View view, int position, long id) {
 			        	// imageSwitcher.setImageURI(Uri.parse(items.get(position).get("Uri_string")));
@@ -156,7 +160,7 @@ public class P9 extends Activity {
 				        	 textswitcher1.setText(detail[choose]);  
 			          }
 			        });
-		 
+		 */
 ////
 			for (int i = 0; i < name.length; i++) {
 		            Map<String, Object> item_command = new HashMap<String, Object>();
@@ -170,7 +174,7 @@ public class P9 extends Activity {
 		    int[] command_ViewID = new int[] {R.id.textView_name,R.id.textView_command};
 		        
 		    commandadapter = new SimpleAdapter(this, 
-		                commands, R.layout.listview_command, command_item,
+		                commands, R.layout.list_for_command, command_item,
 		                command_ViewID);
 			
 			command_list = (ListView) findViewById(R.id.list_for_command);
@@ -216,7 +220,7 @@ public class P9 extends Activity {
 	    imageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
 		button =(Button)findViewById(R.id.button_out);
 		button.setOnClickListener(new Button.OnClickListener(){
-				public void onClick(View arg0) {//·Q­n±µ¨ì°İÃD§¹¦¨­¶­±¡A¤]´N¬O²{¦bÁÙ¨S¼gªº
+				public void onClick(View arg0) {//æƒ³è¦æ¥åˆ°å•é¡Œå®Œæˆé é¢ï¼Œä¹Ÿå°±æ˜¯ç¾åœ¨é‚„æ²’å¯«çš„
 					String review =editText.getText().toString();
 					int choose;//what position of item he choose
 					Intent intent = new Intent();
