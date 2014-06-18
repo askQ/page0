@@ -3,21 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="換頁" />
+   
+  <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="500dp" >
 
- <Gallery
-  android:id="@+id/gallery"
-    android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginLeft="21dp"
-        android:layout_marginTop="15dp"
-    />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+    
 
  <TextView
      android:id="@+id/textView1"
@@ -78,11 +73,28 @@
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:text="show here" />
-
- <Button
-     android:id="@+id/button1"
+ <TextView
+     android:id="@+id/textView12"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:text="send!" />
+     android:text="choices!!" />
+ 
+ <Gallery
+  android:id="@+id/gallery"
+    android:layout_width="300dp"
+        android:layout_height="2500dp"
+        android:layout_alignParentLeft="true"
+      
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="15dp"
+    />
+ <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send out QQ!" />
+ 
+              </LinearLayout>
+        </ScrollView>
  
 </LinearLayout>
