@@ -16,6 +16,9 @@ import com.example.api.API_1;
 import com.example.api.API_1.OnFailListener;
 import com.example.api.API_1.OnSuccessListener;
 import com.example.bean.AuthRequestBean;
+import com.example.bean.AuthResponseBean;
+import com.example.util.Tool;
+import com.google.gson.Gson;
 
 import info.androidhive.slidingmenu.Page4_MainActivity;
 import info.androidhive.slidingmenu.R;
@@ -119,7 +122,7 @@ public class Page_test_1 extends Activity {
 				AuthRequestBean bean = new AuthRequestBean() ;				
 				
 				bean.setAccount(edittext_account.getText().toString());
-				bean.setPassword(md5(edittext_password.getText().toString()));
+				bean.setPassword(Tool.md5(edittext_password.getText().toString()));
 				
 				API_1 api = new API_1() ;
 				
@@ -137,6 +140,11 @@ public class Page_test_1 extends Activity {
 						editor.putString(str_password,edittext_password.getText().toString()) ;
 						editor.commit() ;
 						
+						//解析結果並寫入 sessionid
+						Gson gson = new Gson();						
+						AuthResponseBean bean = gson.fromJson(result.toString(), AuthResponseBean.class) ;						
+						Tool.setSessionid(bean.getSessionid()) ;
+												
 						progressDialog.dismiss() ;
 						Intent intent = new Intent(Page_test_1.this, Page4_MainActivity.class);
 						Page_test_1.this.startActivity(intent);
@@ -233,29 +241,6 @@ public class Page_test_1 extends Activity {
 	    }
 	};
 	
-	//MD5 加密函式 , 回傳 16 進位字串
-		private String md5(String str) {				
-			MessageDigest md5;
-			String res = null ;		
-			try {			
-				byte[] bytesOfMessage = str.getBytes("utf-8");			
-				MessageDigest md = MessageDigest.getInstance("MD5");
-				
-				//get the md5 result
-				byte[] thedigest = md.digest(bytesOfMessage);
-				
-				StringBuilder hexString = new StringBuilder() ;			
-				for (int i=0;i<thedigest.length;i++) {
-					//reslove byte the least two byte and translate to hex String
-		    		hexString.append(Integer.toHexString( thedigest[i]  & 0xff ) );
-		    	}
-				
-				return hexString.toString() ;			
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null ;
-		}
+	
 	
 }
