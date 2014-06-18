@@ -132,9 +132,7 @@ public class Page_test_1 extends Activity {
 						SharedPreferences.Editor editor = sharedPref.edit();
 						editor.putBoolean(str_login_ferver,login_forever.isChecked()) ;
 						editor.putBoolean(str_remeber_me,remember_me.isChecked()) ;
-						
-						Log.d("aeifkz","save : " + login_forever.isChecked() + "\t" +  remember_me.isChecked() ) ;
-						
+												
 						editor.putString(str_account,edittext_account.getText().toString()) ;
 						editor.putString(str_password,edittext_password.getText().toString()) ;
 						editor.commit() ;
@@ -166,8 +164,7 @@ public class Page_test_1 extends Activity {
 		login_forever.setOnCheckedChangeListener(listener);
 		remember_me.setOnCheckedChangeListener(listener);
 		
-		Log.d("aeifkz", "load:"+ sharedPref.getBoolean(str_login_ferver,false) + "\t" + sharedPref.getBoolean(str_remeber_me,false) ) ;
-		
+				
 		//check login_ferver , if true then update edittext 
 		if(sharedPref.getBoolean(str_login_ferver,false)) {
 			login_forever.setChecked(true);
@@ -175,11 +172,9 @@ public class Page_test_1 extends Activity {
 			edittext_password.setText(sharedPref.getString(str_password,"")) ;						
 		}
 		
-		Log.d("aeifkz", "load:"+ sharedPref.getBoolean(str_login_ferver,false) + "\t" + sharedPref.getBoolean(str_remeber_me,false) ) ;
-		
+				
 		//check remember me , if true then update edittext 
-		if(sharedPref.getBoolean(str_remeber_me,false)) {
-			Log.d("aeifkz","not run??") ;
+		if(sharedPref.getBoolean(str_remeber_me,false)) {			
 			remember_me.setChecked(true);
 			edittext_account.setText(sharedPref.getString(str_account,"")) ;
 			edittext_password.setText(sharedPref.getString(str_password,"")) ;
