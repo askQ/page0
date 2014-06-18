@@ -27,13 +27,6 @@ android:layout_height="fill_parent">
         android:layout_y="309dp"
         android:text="starttime show here" />
     <TextView
-	android:id="@+id/description"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:text="blablabla of this Q"
-	android:layout_x="62dp"
-	android:layout_y="56dp" />
-<TextView
 	android:id="@+id/Title"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
@@ -41,24 +34,28 @@ android:layout_height="fill_parent">
 	android:layout_x="58dp"
 	android:layout_y="19dp" />
     <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="52dp"
-        android:layout_y="309dp"
-        android:text="finish time show here" />
-     <TextView
+	android:id="@+id/description"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="blablabla of this Q"
+	android:layout_x="62dp"
+	android:layout_y="56dp" />
+<TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="52dp"
         android:layout_y="309dp"
         android:text="starttime show here" />
- <ListView
-            android:id="@+id/list_for_command"
-            android:layout_width="fill_parent"
-            android:layout_height="100dp"
-        />
+ 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="52dp"
+        android:layout_y="309dp"
+        android:text="finish time show here" />
+     
 <Gallery
      android:id="@+id/gallery"
      android:layout_width="fill_parent"
@@ -114,18 +111,22 @@ android:layout_height="fill_parent">
        android:layout_width="fill_parent"
        android:layout_height="50dp" />
    
-    <ListView
-	android:id="@+id/widget34"
-	android:layout_width="fill_parent"
-       android:layout_height="200dp" 
-	/>
     <TextView
 	android:id="@+id/text_review"
-	android:layout_width="120dip"
-     android:layout_height="40dip"
+	android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
 	android:text="show review here"></TextView>
 	
-
+<TextView
+            android:id="@+id/textView3"
+            android:layout_width="120dip"
+            android:layout_height="40dip"
+               			android:text="show commands"/>
+<ListView
+            android:id="@+id/list_for_command"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+        />
 
 <Button
 	android:id="@+id/button_gohome"
