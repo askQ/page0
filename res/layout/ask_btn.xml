@@ -25,13 +25,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="description of Q" />
+        
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName" >
+        <requestFocus />
+    </EditText>
 <ScrollView
 android:layout_height="200px"
 android:layout_width="fill_parent">
@@ -255,12 +258,6 @@ android:layout_height="fill_parent">
         android:textOn="" 
          android:button="@null"
         android:text="ToggleButton" />
-    
-    
-    
-    
-    
-    
     
     
      <TextView

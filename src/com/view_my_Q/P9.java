@@ -64,15 +64,15 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 public class P9 extends Activity {
 	EditText editText;
+	ListView command_list;
 	Gallery gallery;
-	// List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-	// MyAdapter adapter ;
-	 TextView Title,Detail, finish_time,asker,start_time;
+	ListView command_lisyview;
+	TextView Title,Detail, finish_time,asker,start_time;
 	Button button;
-	 List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
-//	String uri="content://media/external/images/media/105860";
-//	String uri1="content://media/external/images/media/107546";
+	List<Map<String, Object>> commands = new ArrayList<Map<String,Object>>();
+	List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
 	ImageSwitcher imageSwitcher;
+	SimpleAdapter simpleAdapter,commandadapter;
 	TextSwitcher textswitcher,textswitcher1;
 	private int[] hot = {R.drawable.hot,R.drawable.hot,R.drawable.hot
 	};
@@ -82,8 +82,16 @@ public class P9 extends Activity {
 	private String[] detail = {
 				"detail1","detail2","detail3"
 	};
+	
+	private String[] name = {
+	            "name1","name2","name3"
+	    };
+  private String[] command = {
+	            "command","command2","command3"
+	    };
 	int  choose=0;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,8 +106,7 @@ public class P9 extends Activity {
 		Detail = (TextView) findViewById(R.id.description);
 		Detail.setText("description show here");
 		SimpleAdapter simpleAdapter;
-		//review = (TextView) findViewById(R.id.textView5);
-	//	Detail.setText("show the review here.");
+		
 		  for (int i = 0; i < title.length; i++) {
 	            Map<String, Object> item = new HashMap<String, Object>();
 	            item.put("image", hot[i]);
@@ -110,18 +117,11 @@ public class P9 extends Activity {
 	        }
 		
 		gallery = (Gallery) findViewById(R.id.gallery);
-/*
- * for(int i=0;i<array.size;i++){
- * save(title[i],detail[i],image_uri_str[i]);
- * }
- * */
-	//	 save("tierwetle","dwrweretail",uri);
-	//	 save("ewewe","wewewe",uri1);
-	//	 adapter = new MyAdapter(this);
+
 		  String[] ContentItem = new String[] { "image","title", "click","vote" };
-	        int[] ViewID = new int[] {R.id.imageView_choice,R.id.textView_title,R.id.textView_detail,R.id.button1 };
+	      int[] ViewID = new int[] {R.id.imageView_choice,R.id.textView_title,R.id.textView_detail,R.id.button1 };
 	        
-	       simpleAdapter = new SimpleAdapter(this, 
+	     simpleAdapter = new SimpleAdapter(this, 
 	                items, R.layout.listview_for_p9, ContentItem,
 	                ViewID){
 				@Override
@@ -156,6 +156,26 @@ public class P9 extends Activity {
 				        	 textswitcher1.setText(detail[choose]);  
 			          }
 			        });
+		 
+////
+			for (int i = 0; i < name.length; i++) {
+		            Map<String, Object> item_command = new HashMap<String, Object>();
+		            
+		            item_command.put("name", name[i]);
+		            item_command.put("command", command[i]);
+		       
+		            commands.add(item_command);
+		        }
+			String[] command_item = new String[] {"name", "command" };
+		    int[] command_ViewID = new int[] {R.id.textView_name,R.id.textView_command};
+		        
+		    commandadapter = new SimpleAdapter(this, 
+		                commands, R.layout.listview_command, command_item,
+		                command_ViewID);
+			
+			command_list = (ListView) findViewById(R.id.list_for_command);
+			command_list.setAdapter(commandadapter);
+////			 
 		 
 		imageSwitcher = (ImageSwitcher)findViewById(R.id.image_switcher);
 		imageSwitcher.setFactory(new ViewFactory(){
@@ -194,8 +214,8 @@ public class P9 extends Activity {
 		textswitcher1.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
 		imageSwitcher.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
 	    imageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
-		 button =(Button)findViewById(R.id.button_out);
-		 button.setOnClickListener(new Button.OnClickListener(){
+		button =(Button)findViewById(R.id.button_out);
+		button.setOnClickListener(new Button.OnClickListener(){
 				public void onClick(View arg0) {//想要接到問題完成頁面，也就是現在還沒寫的
 					String review =editText.getText().toString();
 					int choose;//what position of item he choose
@@ -217,6 +237,7 @@ public class P9 extends Activity {
 		 
 		 f2 = (Fragment_B_only)fm.findFragmentById(R.id.fragment_1);
 		 //at second fragment's place should display another
+		 
 		 f3 = (Fragment_G_only)fm.findFragmentById(R.id.fragment_2);
 	
 }

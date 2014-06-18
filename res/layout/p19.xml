@@ -54,7 +54,11 @@ android:layout_height="fill_parent">
         android:layout_x="52dp"
         android:layout_y="309dp"
         android:text="starttime show here" />
- 
+ <ListView
+            android:id="@+id/list_for_command"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+        />
 <Gallery
      android:id="@+id/gallery"
      android:layout_width="fill_parent"

@@ -23,11 +23,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-//test fuck you!!!
-//fuck you again!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 public class Page_test_1 extends Activity {
 	CheckBox login_forever,remember_me;
 	public Button button_login,button_regist,button_FBlogin,button_noname;
@@ -52,7 +47,6 @@ public class Page_test_1 extends Activity {
 		button_noname=(Button)findViewById(R.id.button_noname);
 		button_FBlogin=(Button)findViewById(R.id.button_FBlogin);
 		button_login=(Button)findViewById(R.id.button_login);
-		//嚙諄名嚙踝蕭嚙瞌嚙皚嚙踝蕭嚙編嚙璀嚙瘡嚙踝蕭嚙瘢嚙諄歹蕭嚙踝蕭|嚙談迎蕭嚙複伐蕭
 		button_noname.setOnClickListener(new Button.OnClickListener(){
 		public void onClick(View arg0) {
 			Intent intent = new Intent();
@@ -96,18 +90,19 @@ public class Page_test_1 extends Activity {
 	{
 		public void onCheckedChanged(CompoundButton buttonView,boolean isChecked)
 		{
-			//如果user按下Man
+			//if check the login_forever
 				if(login_forever.isChecked()==true)
 				{
 					
 				}
-				//如果user按下Woman
+				//if check the remember_me
 				if(remember_me.isChecked()==true)
 				{
 						
 				}
 		}
 	};
+	//this func is to set the password edittext to show in ****
 	public class AsteriskPasswordTransformationMethod extends PasswordTransformationMethod {
 	    @Override
 	    public CharSequence getTransformation(CharSequence source, View view) {

@@ -64,14 +64,16 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 public class P19 extends Activity {
 	
+	ListView command_list;
 	Gallery gallery;
-	 TextView Title,Detail, finish_time,asker,start_time;
-	 ImageView photo;
-	 List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
+	TextView Title,Detail, finish_time,asker,start_time;
+	ImageView photo;
+	List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
+	List<Map<String, Object>> commands = new ArrayList<Map<String,Object>>();
 	Button button_out;
 	ImageSwitcher imageSwitcher;
 	TextSwitcher textswitcher,textswitcher1;
-	SimpleAdapter simpleAdapter;
+	SimpleAdapter simpleAdapter,commandadapter;
 	private int[] hot = {R.drawable.hot,R.drawable.hot,R.drawable.hot
 	};
 	private String[] title = {
@@ -80,6 +82,12 @@ public class P19 extends Activity {
 	private String[] detail = {
 				"detail1","detail2","detail3"
 	};
+	private String[] name = {
+            "name1","name2","name3"
+    };
+    private String[] command = {
+            "command","command2","command3"
+    };
 	int  choose=1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +134,25 @@ public class P19 extends Activity {
 			            }
 			        });*/
 		
+////
+		for (int i = 0; i < name.length; i++) {
+		           Map<String, Object> item_command = new HashMap<String, Object>();
+		           
+		           item_command.put("name", name[i]);
+		           item_command.put("command", command[i]);
+		      
+		           commands.add(item_command);
+		        }
+		String[] command_item = new String[] {"name", "command" };
+		int[] command_ViewID = new int[] {R.id.textView_name,R.id.textView_command};
+		        
+		commandadapter = new SimpleAdapter(this,commands, R.layout.listview_command, command_item,
+		                command_ViewID);
+			
+		command_list = (ListView) findViewById(R.id.list_for_command);
+		command_list.setAdapter(commandadapter);
+////			
+			
 		imageSwitcher = (ImageSwitcher)findViewById(R.id.image_switcher);
 		imageSwitcher.setFactory(new ViewFactory(){
 		    @Override
