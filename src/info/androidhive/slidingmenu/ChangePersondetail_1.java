@@ -1,10 +1,22 @@
+/* origual data show in edittext account,password,mail,birth,sex,name
+ *                      textview sexual dateText
+ * 
+ * 
+ * 
+ * */
+
 package info.androidhive.slidingmenu;
 
 import info.androidhive.slidingmenu.R;
 
 import java.io.FileNotFoundException;
+import java.util.Calendar;
+
+import com.example.page_test_1.page_2_test;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -17,43 +29,83 @@ import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 public class ChangePersondetail_1 extends Activity 
 {
    
    private ImageView mImg;
+   Calendar calendar;
+   DatePickerDialog datePickerDialog;
+   int mYear, mMonth, mDay;
    private DisplayMetrics mPhone;
    private final static int CAMERA = 66 ;
    private final static int PHOTO = 99 ;
    private Button change;
-   private EditText et1;
-   private EditText et2;
-   private EditText et3;
-   private EditText et4;
-   private EditText et5;
-   private EditText et6;
+   private EditText account;
+   private EditText password;
+   private EditText mail;
+   private EditText birth;
+   private EditText sex;
+   private EditText name;
    
-
+   TextView dateText,sexual;
         
    @Override
    protected void onCreate(Bundle savedInstanceState) 
    {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.fragment_changeperson_1);
-      et1 = (EditText) findViewById(R.id.UserId);
-      et2 = (EditText) findViewById(R.id.password);
-      et3 = (EditText) findViewById(R.id.mail);
-      et4 = (EditText) findViewById(R.id.age);
-      et5 = (EditText) findViewById(R.id.sex);
-      et6 = (EditText) findViewById(R.id.name);
+      account = (EditText) findViewById(R.id.UserId);
+      password = (EditText) findViewById(R.id.password);
+      mail = (EditText) findViewById(R.id.mail);
+      birth = (EditText) findViewById(R.id.age);
+      sex = (EditText) findViewById(R.id.sex);
+      name = (EditText) findViewById(R.id.name);
       change = (Button) findViewById(R.id.button7);
-      
-
+      dateText = (TextView)findViewById(R.id.dateText);
+      sexual=(TextView)findViewById(R.id.sexual);
+  ////it isi for birthday!!      
+      calendar = Calendar.getInstance();
+      mYear = calendar.get(Calendar.YEAR);
+      mMonth = calendar.get(Calendar.MONTH);
+      mDay = calendar.get(Calendar.DAY_OF_MONTH);
+      Button dateButton = (Button)findViewById(R.id.button_date);
+      dateButton.setOnClickListener(new OnClickListener(){
+          @Override
+          public void onClick(View view) {
+              showDialog(0);
+              datePickerDialog.updateDate(mYear, mMonth, mDay);
+          }
+          
+      });
                 
+  /////it is for sexual
+ 	 Spinner spinner = (Spinner) findViewById(R.id.spinnner);
+         //建立一個ArrayAdapter物件，並放置下拉選單的內容
+      ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,new String[]{"Boy","Girl"});
+         //設定下拉選單的樣式
+      adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+      spinner.setAdapter(adapter);
+      
+         //設定項目被選取之後的動作
+      spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
+          public void onItemSelected(AdapterView adapterView, View view, int position, long id){
+           //   Toast.makeText(this, "您選擇"+adapterView.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+          }
+          public void onNothingSelected(AdapterView arg0) {
+            //  Toast.makeText(page_2_test.this, "您沒有選擇任何項目", Toast.LENGTH_LONG).show();
+          }
+      });
       //�蕭嚙踝蕭�蕭�恬蕭嚙賣嚙�   
       mPhone = new DisplayMetrics();
       getWindowManager().getDefaultDisplay().getMetrics(mPhone);
@@ -100,12 +152,12 @@ public class ChangePersondetail_1 extends Activity
           @Override
           public void onClick(View arg0) {
                   /*取得输入框中的内容*/
-          String et1Str = et1.getText().toString();
-          String et2Str = et2.getText().toString();
-          String et3Str = et3.getText().toString();
-          String et4Str = et4.getText().toString();
-          String et5Str = et5.getText().toString();
-          String et6Str = et6.getText().toString();
+          String et1Str = account.getText().toString();
+          String et2Str = password.getText().toString();
+          String et3Str = mail.getText().toString();
+          String et4Str = birth.getText().toString();
+          String et5Str = sex.getText().toString();
+          String et6Str = name.getText().toString();
           //创建Intent对象，参数分别为上下文，要跳转的Activity类
           Intent intent = new Intent(ChangePersondetail_1.this, ChangePersondetail.class);
           //将要传递的值附加到Intent对象
@@ -178,5 +230,27 @@ public class ChangePersondetail_1 extends Activity
          mImg.setImageBitmap(mScaleBitmap);
       }
    else mImg.setImageBitmap(bitmap);
+   }
+   @Override
+   protected Dialog onCreateDialog(int id) {
+       datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+           @Override
+           public void onDateSet(DatePicker view, int year, int month,
+                   int day) {
+               mYear = year;
+               mMonth = month;
+               mDay = day;
+               dateText.setText(setDateFormat(year,month,day)); 
+           }
+           
+       }, mYear,mMonth, mDay);
+       
+       return datePickerDialog;
+   }
+   
+   private String setDateFormat(int year,int monthOfYear,int dayOfMonth){
+       return String.valueOf(year) + "/"
+       + String.valueOf(monthOfYear + 1) + "/"
+       + String.valueOf(dayOfMonth);
    }
 }
