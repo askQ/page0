@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
 
@@ -27,11 +28,13 @@ import android.widget.AdapterView.OnItemLongClickListener;
 
 public class PersondeiailFragment extends Fragment {
 
-	private ListView listView;
-	private ListView listView2;
-	private ArrayAdapter<String> adapter;
-	private ArrayAdapter<String> adapter2;
-	private Button changePersonDetail;
+	ListView listView;
+	ListView listView2;
+	ArrayAdapter<String> adapter;
+	ArrayAdapter<String> adapter2;
+	Button changePersonDetail;
+	TextView name,account,password,mail,birthday,sexual;
+	
 	
 	public PersondeiailFragment(){}
 	
@@ -42,23 +45,30 @@ public class PersondeiailFragment extends Fragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
- 
+	
         View rootView = inflater.inflate(R.layout.fragment_persondetail, container, false);
+		name=(TextView)rootView.findViewById(R.id.txtLabel);
+		account=(TextView)rootView.findViewById(R.id.UserId);
+		password=(TextView)rootView.findViewById(R.id.password);
+		mail=(TextView)rootView.findViewById(R.id.mail);
+		birthday=(TextView)rootView.findViewById(R.id.age);
+		sexual=(TextView)rootView.findViewById(R.id.sex);
+		
         changePersonDetail=(Button)rootView.findViewById(R.id.button2);
         listView = (ListView) rootView.findViewById(R.id.listView1);
         listView2 = (ListView) rootView.findViewById(R.id.listView2);
         changePersonDetail.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View arg0) {
 				Intent intent = new Intent();
-				intent.setClass(getActivity(), ChangePersondetail.class);
+				intent.setClass(getActivity(), ChangePersondetail_1.class);
 				startActivity(intent); 
 				getActivity().finish();
 				
 			}}
 			);
 		// 皜���
-	       String[] arr1 = new String[]{"��A","��B"};
-	       String[] arr2 = new String[]{"��C","��D"};
+	       String[] arr1 = new String[]{"title1","title2"};
+	       String[] arr2 = new String[]{"title3(fivished)","title4(finished)"};
 		adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_expandable_list_item_1,arr1);
 		adapter2=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_expandable_list_item_1,arr2);
 
