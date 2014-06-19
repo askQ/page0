@@ -5,11 +5,21 @@ import info.androidhive.slidingmenu.R;
 import java.io.FileNotFoundException;
 import java.util.Calendar;
 
+import org.json.JSONObject;
+
+import com.example.api.API_1;
+import com.example.api.API_1.OnFailListener;
+import com.example.api.API_1.OnSuccessListener;
+import com.example.bean.AuthResponseBean;
+import com.example.bean.MemberInfoRequestBean;
 import com.example.page_test_1.Page_test_1.AsteriskPasswordTransformationMethod;
+import com.example.util.Tool;
+import com.google.gson.Gson;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -43,19 +53,41 @@ public class page_2_test extends Activity
    DatePickerDialog datePickerDialog;
    ImageView mImg;
    DisplayMetrics mPhone;
+   
    final static int CAMERA = 66 ;
    final static int PHOTO = 99 ;
+   
+   final static String BOY = "01" ;
+   final static String GIRL = "02" ;
+   final static String DEFAULT_IMG_FORMAT = "jpg" ;
+   
+   //儲存性別
+   String sex  ;   
+   //儲存個人圖片的圖示
+   String pic = null ;   
+   
+   
+   ProgressDialog progressDialog ;
    EditText AskerAccount,Askerpassword,Askername,Email,Askerpassword2;    
    @Override
    protected void onCreate(Bundle savedInstanceState) 
    {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.page_2_test);
+      Email = (EditText)findViewById(R.id.PersonName) ;
       AskerAccount=(EditText)findViewById(R.id.editText_account);
       Askerpassword=(EditText)findViewById(R.id.editText_password);
       Askerpassword2=(EditText)findViewById(R.id.editText_password_2);
+      Askername = (EditText)findViewById(R.id.name_edit);
       Askerpassword.setTransformationMethod(new AsteriskPasswordTransformationMethod());
       Askerpassword2.setTransformationMethod(new AsteriskPasswordTransformationMethod());
+      
+	//initial ProgressDialog
+	progressDialog = new ProgressDialog(this) ;
+	progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+	//progressDialog.setCancelable(false);
+      
+      
 ////it isi for birthday!!      
       calendar = Calendar.getInstance();
       mYear = calendar.get(Calendar.YEAR);
@@ -83,20 +115,69 @@ public class page_2_test extends Activity
       Button mPhoto = (Button) findViewById(R.id.photo);
       
       
-	button1.setOnClickListener(new Button.OnClickListener(){
-		public void onClick(View arg0) {
-			//take out the information user send in
-			AskerAccount.getText().toString();
-			Askerpassword.getText().toString();
-			Askername.getText().toString();
-			Email.getText().toString();
-			dateText.getText().toString();
-			Intent intent = new Intent();
-			intent.setClass(page_2_test.this, page3.class);
-			startActivity(intent); 
-			page_2_test.this.finish(); 
-		}}
-		);
+      button1.setOnClickListener(new Button.OnClickListener(){
+  		public void onClick(View arg0) {
+  			
+  			//這邊安插登入API的呼叫 , 準備註冊使用的 bean
+  			MemberInfoRequestBean bean = new MemberInfoRequestBean() ; 			
+  			
+  			bean.setAccount(AskerAccount.getText().toString());  			  	  			
+  			bean.setPassword( Tool.md5(  Askerpassword.getText().toString() )  );
+  			bean.setName(Askername.getText().toString());
+  			bean.setEmail(Email.getText().toString());
+  			bean.setBirthtime(dateText.getText().toString());
+  			bean.setSex(sex);
+  			
+  			progressDialog.setTitle("註冊");
+  			progressDialog.setMessage("處理中");
+  			
+  			//判斷是否有圖片資料需要上傳
+  			if(pic!=null) {
+  				bean.setExtension(DEFAULT_IMG_FORMAT);
+  				bean.setPic(pic);
+  				progressDialog.setMessage("上傳圖片需等待較多時間,處理中...");
+  			}			
+  						
+  			API_1 api = new API_1() ;
+  			
+  			api.setOnSuccessListener(new OnSuccessListener() {
+  				//回傳成功之處理
+  				@Override
+  				public void onSucess(JSONObject result) {
+  					
+  					//解析結果並寫入 sessionid
+  					Gson gson = new Gson();						
+  					AuthResponseBean bean = gson.fromJson(result.toString(), AuthResponseBean.class) ;						
+  					Tool.setSessionid(bean.getSessionid()) ;					
+  										
+  					progressDialog.dismiss() ;
+  					
+  					//take out the information user send in
+  					Intent intent = new Intent();
+  					intent.setClass(page_2_test.this, page3.class);
+  					startActivity(intent); 
+  					page_2_test.this.finish();
+  				}								
+  			});
+  			
+  			api.setOnFailListener(new OnFailListener(){
+  				//回傳失敗之處理
+  				@Override
+  				public void onFail(String errorMsg) {
+  					progressDialog.dismiss() ;
+  					Toast.makeText(page_2_test.this,"註冊失敗", Toast.LENGTH_LONG).show(); 
+  				}					
+  			}) ;
+  			
+  			
+  			api.register(bean);
+  			
+  			
+  			progressDialog.show();			
+  						
+   
+  		}}
+  		);
 /////it is for sexual
 	 Spinner spinner = (Spinner) findViewById(R.id.spinnner);
         //建立一個ArrayAdapter物件，並放置下拉選單的內容
@@ -109,9 +190,17 @@ public class page_2_test extends Activity
      spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
          public void onItemSelected(AdapterView adapterView, View view, int position, long id){
              Toast.makeText(page_2_test.this, "您選擇"+adapterView.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+             
+             if("Boy".equals(adapterView.getSelectedItem().toString())) {
+            	 sex = BOY ;
+             }
+             else if("Girl".equals(adapterView.getSelectedItem().toString())) {
+            	 sex = GIRL ;
+             }
+             
          }
          public void onNothingSelected(AdapterView arg0) {
-             Toast.makeText(page_2_test.this, "您沒有選擇任何項目", Toast.LENGTH_LONG).show();
+             Toast.makeText(page_2_test.this, "您沒有選擇任何項目", Toast.LENGTH_LONG).show();             
          }
      });
      
@@ -163,14 +252,20 @@ public class page_2_test extends Activity
                       
          try
          {
-         //bitmap the pthto 
-         Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-
-         //嚙賣�謘蕭�蕭嚙賜捂撣蕭�穿蕭嚙踝蹌哨蕭皜賂蕭��蕭��
-         //ScalePic嚙賣�謘蕭謘橘蕭嚙質�蹓選蕭�蛛�穿蕭嚙�     
-         if(bitmap.getWidth()>bitmap.getHeight())ScalePic(bitmap,
-                                                          mPhone.heightPixels);
-         else ScalePic(bitmap,mPhone.widthPixels);
+	         //bitmap the pthto 
+	         Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+	
+	         //嚙賣�謘蕭�蕭嚙賜捂撣蕭�穿蕭嚙踝蹌哨蕭皜賂蕭��蕭��
+	         //ScalePic嚙賣�謘蕭謘橘蕭嚙質�蹓選蕭�蛛�穿蕭嚙�     
+	         if(bitmap.getWidth()>bitmap.getHeight()) {
+	        	 ScalePic(bitmap,mPhone.heightPixels);
+	         }        	 
+	         else {
+	        	 ScalePic(bitmap,mPhone.widthPixels);
+	         }
+	         
+	         pic = Tool.encode_to_base64(bitmap) ;
+	         
          } 
          catch (FileNotFoundException e)
          {
@@ -214,7 +309,7 @@ public class page_2_test extends Activity
                mYear = year;
                mMonth = month;
                mDay = day;
-               dateText.setText("my birthday"+setDateFormat(year,month,day)); 
+               dateText.setText(setDateFormat(year,month,day)); 
            }
            
        }, mYear,mMonth, mDay);
