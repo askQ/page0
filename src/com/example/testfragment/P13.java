@@ -46,7 +46,7 @@ public class P13 extends Activity{
 		mYear = calendar.get(Calendar.YEAR);
 		mMonth = calendar.get(Calendar.MONTH);
 		mDay = calendar.get(Calendar.DAY_OF_MONTH);
-		dateText.setText(setDateFormat(mYear,mMonth,mDay+7)); 
+		dateText.setText(setDateFormat(mYear,mMonth,mDay)); 
 		tButton = (ToggleButton) findViewById(R.id.toggleButton1);
 		tButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 		@Override
