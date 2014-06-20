@@ -51,6 +51,8 @@ public class Page_test_1 extends Activity {
 	private static final String str_account = "com.example.page_test_1.account" ;
 	private static final String str_password = "com.example.page_test_1.password" ;
 	
+	private static final String LOGIN_BY_APP = "01" ;
+	
 	
 	public ProgressDialog progressDialog ;
 	CheckBox login_forever,remember_me;
@@ -121,6 +123,7 @@ public class Page_test_1 extends Activity {
 				//這邊安插登入API的呼叫 , 準備登入使用的bean
 				AuthRequestBean bean = new AuthRequestBean() ;				
 				
+				bean.setType(LOGIN_BY_APP);
 				bean.setAccount(edittext_account.getText().toString());
 				bean.setPassword(Tool.md5(edittext_password.getText().toString()));
 				

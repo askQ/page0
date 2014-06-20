@@ -5,7 +5,7 @@ public class AuthRequestBean extends RequestBean {
 	private String account ;
 	private String password ;
 	private String sessionid ;
-	private String type="01" ;
+	private String type ;
 	
 	public String getAccount() {
 		return account;
