@@ -1,10 +1,17 @@
 package com.example.util;
 
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 public class Tool {
 	
@@ -19,27 +26,58 @@ public class Tool {
 		Tool.sessionid = sessionid;
 	}
 	
-	//傳入Bitmap參數 , 回傳JPG格式的Base64編碼結果
-		public static String encode_to_base64(Bitmap bitmap){
+	
+	//傳入圖片網址，回傳圖檔的 Bitmap , 須搭配 Handler or AsyncTask 使用
+	public static Bitmap get_bitmap(String picurl) {
+		
+		Bitmap bitmap = null ;
+		
+		try {
 			
-			ByteArrayOutputStream bos = new ByteArrayOutputStream() ;
-	        bitmap.compress(Bitmap.CompressFormat.JPEG,100,bos) ;
-	        
-	        //get img btye array
-	        byte [] b_data = bos.toByteArray() ;
-	        
-	        //encode byte array to base64 format 
-	        byte [] new_data = Base64.encode(b_data, Base64.DEFAULT) ;
-	        
-	        StringBuilder buffer = new StringBuilder() ;
-	        
-	        //get byte data from base64 array , and save as char format 
-	        for(int i=0 ; i<new_data.length ; i++) {
-	        	buffer.append((char)new_data[i]) ;
+			URL url = new URL(picurl);
+			URLConnection conn = url.openConnection();
+			
+			HttpURLConnection httpConn = (HttpURLConnection)conn;
+	        httpConn.setRequestMethod("GET");
+	        httpConn.connect();
+
+	        if (httpConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+	            InputStream inputStream = httpConn.getInputStream();
+
+	            bitmap = BitmapFactory.decodeStream(inputStream);
+	            inputStream.close();	            
 	        }
-	        
-	        return buffer.toString() ;
+			
+		} catch (Exception e) {			
+			e.printStackTrace();
 		}
+		
+		return bitmap ;
+		
+	}
+	
+	
+	//傳入Bitmap參數 , 回傳JPG格式的Base64編碼結果
+	public static String encode_to_base64(Bitmap bitmap){
+		
+		ByteArrayOutputStream bos = new ByteArrayOutputStream() ;
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,bos) ;
+        
+        //get img btye array
+        byte [] b_data = bos.toByteArray() ;
+        
+        //encode byte array to base64 format 
+        byte [] new_data = Base64.encode(b_data, Base64.DEFAULT) ;
+        
+        StringBuilder buffer = new StringBuilder() ;
+        
+        //get byte data from base64 array , and save as char format 
+        for(int i=0 ; i<new_data.length ; i++) {
+        	buffer.append((char)new_data[i]) ;
+        }
+        
+        return buffer.toString() ;
+	}
 	
 
 	//MD5 加密函式 , 回傳 16 進位字串
