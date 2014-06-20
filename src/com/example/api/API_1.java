@@ -37,7 +37,8 @@ public class API_1 {
 	}
 
 	/* static variables and functions */
-	private static String serverURL = "http://askq.lionfree.net/";
+	private static String serverURL = "http://askq.lionfree.net/";	
+	public static String server_url = serverURL.substring(0,serverURL.length()-1) ;
 	
 
 		
@@ -69,11 +70,21 @@ public class API_1 {
 	public void register(MemberInfoRequestBean bean) {		
 		Gson gson = new Gson() ;	
 		try {			
-			JSONObject obj = new JSONObject(gson.toJson(bean)) ;
+			JSONObject obj = new JSONObject(gson.toJson(bean)) ;			
 			Task task = new Task() ;
 			task.execute(OP_REGISTER,obj.toString()) ;
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}		
+	}
+	
+	public void query_info(AuthRequestBean bean) {		
+		Gson gson = new Gson() ;	
+		try {			
+			JSONObject obj = new JSONObject(gson.toJson(bean)) ;			
+			Task task = new Task() ;
+			task.execute(OP_QUERY_INFO,obj.toString()) ;
 		} catch (Exception e) {
-			Log.d("aeifkz",e.toString()) ;
 			e.printStackTrace();
 		}		
 	}
@@ -87,7 +98,8 @@ public class API_1 {
 		UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters, HTTP.UTF_8);
 		request.setEntity(formEntity);
 
-		HttpResponse response = httpClient.execute(request);		
+		HttpResponse response = httpClient.execute(request);
+				
 		return new JSONObject(EntityUtils.toString(response.getEntity(), HTTP.UTF_8));
 	}	
 
@@ -96,8 +108,7 @@ public class API_1 {
 		protected JSONObject doInBackground(String... params) {
 			try {				
 				return sendRequest(params[0],params[1]);
-			} catch (Exception e) {
-				Log.d("aeifkz",e.toString()) ;
+			} catch (Exception e) {				
 				e.printStackTrace();
 				return null;
 			}
@@ -105,7 +116,7 @@ public class API_1 {
 
 		@Override
 		protected void onPostExecute(JSONObject result) {
-									
+															
 			try {
 				if (result != null) {
 					if (result.getString("code").equals("0000")) {
@@ -116,8 +127,7 @@ public class API_1 {
 				} else {
 					fail_callback.onFail("Unknown Error");
 				}
-			} catch (JSONException e) {
-				Log.d("aeifkz",e.toString()) ;
+			} catch (JSONException e) {				
 				e.printStackTrace();
 				fail_callback.onFail("Unknown Error");
 			}
