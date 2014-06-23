@@ -178,4 +178,60 @@ public class Add_choice_MainActivity extends Activity implements Comunicator {
 		  list.add(map);*/
 		 
 	}
+	public boolean onKeyDown(int keyCode,KeyEvent event){
+
+	      if(keyCode==KeyEvent.KEYCODE_BACK && event.getRepeatCount()==0){   //確定按下退出鍵and防止重複按下退出鍵
+
+	          dialog();
+
+	      }
+
+	      return false;
+
+	  }
+
+	  
+
+	   private void dialog(){
+
+	       AlertDialog.Builder builder = new AlertDialog.Builder(Add_choice_MainActivity.this); //創建訊息方塊
+
+	       builder.setMessage("確定要取消問問題嗎？");
+
+	       builder.setTitle("不問了");
+
+	       builder.setPositiveButton("確認", new DialogInterface.OnClickListener()  {
+
+	           @Override
+
+	           public void onClick(DialogInterface dialog, int which) {
+	        	   Intent intent = new Intent();
+					intent.setClass(Add_choice_MainActivity.this, Page4_MainActivity.class);
+					startActivity(intent); 
+					
+	              dialog.dismiss(); //dismiss為關閉dialog,Activity還會保留dialog的狀態
+
+	              Add_choice_MainActivity.this.finish();//關閉activity
+	              
+	              
+
+	      }
+
+	    });
+
+	       builder.setNegativeButton("繼續問", new DialogInterface.OnClickListener()  {
+
+	           @Override
+
+	           public void onClick(DialogInterface dialog, int which) {
+
+	        dialog.dismiss();
+
+	      }
+
+	    });
+
+	    builder.create().show();
+
+	   }
 }
