@@ -25,7 +25,7 @@ public class page0 extends Activity {
                                  Intent intent = new Intent(page0.this, Page_test_1.class);
                                  page0.this.startActivity(intent);
 //                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                               
+                                 page0.this.finish();
                          }
 
                  }, SPLASH_DISPLAY_LENGHT);
