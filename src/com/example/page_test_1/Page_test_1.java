@@ -168,6 +168,7 @@ public class Page_test_1 extends Activity {
 				progressDialog.setTitle("登入");
 				progressDialog.setMessage("處理中");
 				progressDialog.show() ;
+				Page_test_1.this.finish(); 
 	
 			}}
 			);
