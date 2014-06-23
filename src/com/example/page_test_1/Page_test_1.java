@@ -198,6 +198,60 @@ public class Page_test_1 extends Activity {
 		
 		
 	}
+	// in order to click return key to finish this app
+	 public boolean onKeyDown(int keyCode,KeyEvent event){
+
+	      if(keyCode==KeyEvent.KEYCODE_BACK && event.getRepeatCount()==0){   //確定按下退出鍵and防止重複按下退出鍵
+
+	          dialog();
+
+	      }
+
+	      return false;
+
+	  }
+
+	  
+
+	   private void dialog(){
+
+	       AlertDialog.Builder builder = new AlertDialog.Builder(Page_test_1.this); //創建訊息方塊
+
+	       builder.setMessage("確定要離開？");
+
+	       builder.setTitle("離開");
+
+	       builder.setPositiveButton("確認", new DialogInterface.OnClickListener()  {
+
+	           @Override
+
+	           public void onClick(DialogInterface dialog, int which) {
+
+	              dialog.dismiss(); //dismiss為關閉dialog,Activity還會保留dialog的狀態
+
+	              Page_test_1.this.finish();//關閉activity
+	              
+	              
+
+	      }
+
+	    });
+
+	       builder.setNegativeButton("取消", new DialogInterface.OnClickListener()  {
+
+	           @Override
+
+	           public void onClick(DialogInterface dialog, int which) {
+
+	        dialog.dismiss();
+
+	      }
+
+	    });
+
+	    builder.create().show();
+
+	   }
 
 	
 	//監聽user 是否有選取
