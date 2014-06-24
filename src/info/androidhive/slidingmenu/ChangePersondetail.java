@@ -37,6 +37,12 @@ private TextView name1;
 
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.fragment_changeperson);
+	        
+	
+	//photo of asker
+	photo =(ImageView) findViewById(R.id.img);       
+	//photo.setimg(...) ;       
+	        
 	    
 //取得TextView对象
 	UserId = (TextView) findViewById(R.id.UserId);
