@@ -51,7 +51,6 @@ public class ChangePersondetail_1 extends Activity
    private final static int CAMERA = 66 ;
    private final static int PHOTO = 99 ;
    private Button change;
-   private EditText account;
    private EditText password;
    private EditText mail;
    private EditText birth;
@@ -65,7 +64,7 @@ public class ChangePersondetail_1 extends Activity
    {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.fragment_changeperson_1);
-      account = (EditText) findViewById(R.id.UserId);
+     
       password = (EditText) findViewById(R.id.password);
       mail = (EditText) findViewById(R.id.mail);
       birth = (EditText) findViewById(R.id.age);
@@ -152,7 +151,7 @@ public class ChangePersondetail_1 extends Activity
           @Override
           public void onClick(View arg0) {
                   /*取得输入框中的内容*/
-          String et1Str = account.getText().toString();
+          
           String et2Str = password.getText().toString();
           String et3Str = mail.getText().toString();
           String et4Str = birth.getText().toString();
@@ -161,7 +160,6 @@ public class ChangePersondetail_1 extends Activity
           //创建Intent对象，参数分别为上下文，要跳转的Activity类
           Intent intent = new Intent(ChangePersondetail_1.this, ChangePersondetail.class);
           //将要传递的值附加到Intent对象
-          intent.putExtra("et1", et1Str);
           intent.putExtra("et2", et2Str);
           intent.putExtra("et3", et3Str);
           intent.putExtra("et4", et4Str);
