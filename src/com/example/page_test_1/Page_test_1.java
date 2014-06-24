@@ -136,6 +136,8 @@ public class Page_test_1 extends Activity {
 					//回傳成功之處理
 					@Override
 					public void onSucess(JSONObject result) {
+						
+						 
 												
 						//store info to resource
 						SharedPreferences.Editor editor = sharedPref.edit();
@@ -150,10 +152,14 @@ public class Page_test_1 extends Activity {
 						Gson gson = new Gson();						
 						AuthResponseBean bean = gson.fromJson(result.toString(), AuthResponseBean.class) ;						
 						Tool.setSessionid(bean.getSessionid()) ;
-												
+						
 						progressDialog.dismiss() ;
-						Intent intent = new Intent(Page_test_1.this, Page4_MainActivity.class);
+						
+						Intent intent = new Intent(Page_test_1.this, Page4_MainActivity.class);						
 						Page_test_1.this.startActivity(intent);
+						
+						Page_test_1.this.finish();
+						
 					}								
 				});
 				
@@ -171,8 +177,7 @@ public class Page_test_1 extends Activity {
 				progressDialog.setTitle("登入");
 				progressDialog.setMessage("處理中");
 				progressDialog.show() ;
-				Page_test_1.this.finish(); 
-	
+				
 			}}
 			);
 		
