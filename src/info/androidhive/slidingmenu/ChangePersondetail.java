@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 
 public class ChangePersondetail extends Activity {
-
+ImageView photo;
 private Button change;
 private TextView UserId;
 private TextView password1;
