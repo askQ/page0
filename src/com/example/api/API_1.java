@@ -78,13 +78,24 @@ public class API_1 {
 		}		
 	}
 	
+	public void edit_info(AuthRequestBean bean) {		
+		Gson gson = new Gson() ;	
+		try {			
+			JSONObject obj = new JSONObject(gson.toJson(bean)) ;			
+			Task task = new Task() ;
+			task.execute(OP_EDIT_INFO,obj.toString()) ;
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}		
+	}
+	
 	public void query_info(AuthRequestBean bean) {		
 		Gson gson = new Gson() ;	
 		try {			
 			JSONObject obj = new JSONObject(gson.toJson(bean)) ;			
 			Task task = new Task() ;
 			task.execute(OP_QUERY_INFO,obj.toString()) ;
-		} catch (Exception e) {
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}		
 	}
@@ -116,7 +127,7 @@ public class API_1 {
 
 		@Override
 		protected void onPostExecute(JSONObject result) {
-															
+									
 			try {
 				if (result != null) {
 					if (result.getString("code").equals("0000")) {
