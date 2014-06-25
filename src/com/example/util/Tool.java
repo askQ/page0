@@ -10,8 +10,10 @@ import java.security.MessageDigest;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.ImageView;
 
 public class Tool {
 	
@@ -24,6 +26,35 @@ public class Tool {
 
 	public static void setSessionid(String sessionid) {
 		Tool.sessionid = sessionid;
+	}
+	
+	
+	//調整圖片大小函式
+	public static void scalePic(ImageView mImg,Bitmap bitmap,int phone) {
+		
+		float mScale = 1 ;	            
+  
+		if(bitmap.getWidth() > phone )  {
+			Matrix mMat = new Matrix() ;
+			mMat.setScale(mScale, mScale) ;
+			Bitmap mScaleBitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),mMat,false);
+			mImg.setImageBitmap(mScaleBitmap);
+		}
+		else {
+			mImg.setImageBitmap(bitmap);
+		}
+		
+	}
+	
+	//取得性別代號函式
+	public static String getSexNum(String data) {		
+		if("BOY".equals(data.toUpperCase())) {
+			return "01" ;
+		}
+		else if("GIRL".equals(data.toUpperCase())) {
+			return "02" ;
+		}
+		return null ;
 	}
 	
 	
