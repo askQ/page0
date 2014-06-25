@@ -1,6 +1,18 @@
 package info.androidhive.slidingmenu;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import org.json.JSONObject;
+
+import com.example.api.API_1;
+import com.example.api.API_1.OnFailListener;
+import com.example.api.API_1.OnSuccessListener;
+import com.example.bean.AuthRequestBean;
+import com.example.bean.MemberInfoResponseBean;
 import com.example.testfragment.P13;
+import com.example.util.Tool;
+import com.google.gson.Gson;
 import com.user_vote_pages.P17;
 import com.view_my_Q.MP16;
 import com.view_my_Q.P19;
@@ -8,8 +20,12 @@ import com.view_my_Q.P9;
 
 import android.R.string;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +51,25 @@ public class PersondeiailFragment extends Fragment {
 	Button changePersonDetail;
 	TextView name,account,password,mail,birthday,sexual;
 	
+	ImageView personalimg ;
+	Bitmap personalbitmap ;
+	
+	ProgressDialog progressDialog ;	
+	String picurl = null ;
+	
+	
+	//設定抓完圖片後進行UI切換圖片的處理
+	private Handler messageHandler = new Handler() {    	
+        public void handleMessage(Message msg) {        	
+            switch(msg.what) {
+            	case 0 :
+	            	personalimg.setImageBitmap(personalbitmap);
+            	return ;            
+            }            
+            progressDialog.dismiss() ;            
+        }
+    };
+	
 	
 	public PersondeiailFragment(){}
 	
@@ -53,6 +88,7 @@ public class PersondeiailFragment extends Fragment {
 		mail=(TextView)rootView.findViewById(R.id.mail);
 		birthday=(TextView)rootView.findViewById(R.id.age);
 		sexual=(TextView)rootView.findViewById(R.id.sex);
+		personalimg = (ImageView)rootView.findViewById(R.id.backgrd) ;
 		
         changePersonDetail=(Button)rootView.findViewById(R.id.button2);
         listView = (ListView) rootView.findViewById(R.id.listView1);
@@ -100,6 +136,68 @@ public class PersondeiailFragment extends Fragment {
 						return false;
 			            }
 			});
+		
+		API_1 api = new API_1() ;
+		
+		AuthRequestBean bean = new AuthRequestBean() ; 
+		bean.setSessionid(Tool.getSessionid());
+		
+		api.setOnSuccessListener(new OnSuccessListener() {
+			//回傳成功之處理
+			@Override
+			public void onSucess(JSONObject result) {
+								
+				Gson gson = new Gson();
+				
+				//從結果解析出 MemberInfoResponseBean
+				MemberInfoResponseBean bean = gson.fromJson(result.toString(),MemberInfoResponseBean.class) ;
+				
+				account.setText(bean.getAccount());
+				name.setText(bean.getName());				
+				mail.setText(bean.getEmail());
+				birthday.setText(bean.getBirthtime());
+				sexual.setText(bean.getSex());
+								
+				try {
+				
+					//假如帶有 picurl 資料 , 則進行圖片傳輸  api					
+					if(bean.getPicurl()!=null) {
+						picurl = API_1.server_url + URLDecoder.decode(bean.getPicurl(),"utf-8") ;						
+						new Thread() {							
+							public void run() {
+								personalbitmap = Tool.get_bitmap(picurl) ;
+								messageHandler.sendEmptyMessage(0) ;								
+							}														
+						}.start();
+					}
+					
+					
+				} catch (Exception e) {					 
+					e.printStackTrace();
+				}
+				
+				progressDialog.dismiss() ;				
+			}								
+		});
+		
+		api.setOnFailListener(new OnFailListener(){
+			//回傳失敗之處理
+			@Override
+			public void onFail(String errorMsg) {
+				progressDialog.dismiss() ;
+				Toast.makeText(PersondeiailFragment.this.getActivity(),"查詢失敗", Toast.LENGTH_LONG).show(); 
+			}					
+		}) ;
+		
+		
+		api.query_info(bean);
+		
+		progressDialog = new ProgressDialog(this.getActivity()) ;				
+		
+		progressDialog.setTitle("查詢個人資料");
+		progressDialog.setMessage("處理中");
+		progressDialog.show();
+		
         return rootView;
     }
 	

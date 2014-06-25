@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.util.Calendar;
 
 import com.example.page_test_1.page_2_test;
+import com.example.util.Tool;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -28,6 +29,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,11 +55,13 @@ public class ChangePersondetail_1 extends Activity
    private Button change;
    private EditText password;
    private EditText mail;
-   private EditText birth;
-   private EditText sex;
    private EditText name;
    
-   TextView dateText,sexual;
+   Uri picuri ;
+         
+   TextView dateText ;
+   
+   private String sex ;
         
    @Override
    protected void onCreate(Bundle savedInstanceState) 
@@ -67,12 +71,10 @@ public class ChangePersondetail_1 extends Activity
      
       password = (EditText) findViewById(R.id.password);
       mail = (EditText) findViewById(R.id.mail);
-      birth = (EditText) findViewById(R.id.age);
-      sex = (EditText) findViewById(R.id.sex);
       name = (EditText) findViewById(R.id.name);
       change = (Button) findViewById(R.id.button7);
       dateText = (TextView)findViewById(R.id.dateText);
-      sexual=(TextView)findViewById(R.id.sexual);
+      mImg = (ImageView) findViewById(R.id.img) ;
   ////it isi for birthday!!      
       calendar = Calendar.getInstance();
       mYear = calendar.get(Calendar.YEAR);
@@ -100,6 +102,7 @@ public class ChangePersondetail_1 extends Activity
       spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
           public void onItemSelected(AdapterView adapterView, View view, int position, long id){
            //   Toast.makeText(this, "您選擇"+adapterView.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+        	  sex = adapterView.getSelectedItem().toString() ; 
           }
           public void onNothingSelected(AdapterView arg0) {
             //  Toast.makeText(page_2_test.this, "您沒有選擇任何項目", Toast.LENGTH_LONG).show();
@@ -150,23 +153,31 @@ public class ChangePersondetail_1 extends Activity
           
           @Override
           public void onClick(View arg0) {
-                  /*取得输入框中的内容*/
+        	  
+        	  /*取得输入框中的内容*/
+        	  
+          String s_password = password.getText().toString();
+          String s_mail = mail.getText().toString();
+          String s_birthtime = dateText.getText().toString();
+          String s_sex = sex ;
+          String s_name = name.getText().toString();
+                    
           
-          String et2Str = password.getText().toString();
-          String et3Str = mail.getText().toString();
-          String et4Str = birth.getText().toString();
-          String et5Str = sex.getText().toString();
-          String et6Str = name.getText().toString();
           //创建Intent对象，参数分别为上下文，要跳转的Activity类
           Intent intent = new Intent(ChangePersondetail_1.this, ChangePersondetail.class);
           //将要传递的值附加到Intent对象
-          intent.putExtra("et2", et2Str);
-          intent.putExtra("et3", et3Str);
-          intent.putExtra("et4", et4Str);
-          intent.putExtra("et5", et5Str);
-          intent.putExtra("et6", et6Str);
+          intent.putExtra("password",s_password);
+          intent.putExtra("mail",s_mail);
+          intent.putExtra("birthtime",s_birthtime);
+          intent.putExtra("sex",s_sex);
+          intent.putExtra("name",s_name);
+          intent.putExtra("picuri",picuri) ;
+                   
+          
           //启动该Intent对象，实现跳转
           startActivity(intent);
+          
+          
           }
   });
    }
@@ -179,23 +190,26 @@ public class ChangePersondetail_1 extends Activity
    @Override 
    protected void onActivityResult(int requestCode, int resultCode,Intent data)
    {
-      //嚙踝�equestCode嚙賣�謘蕭�秋�嚙賜硃嚙踝蕭賹���嚙踝蕭�蕭嚙質��蕭�綜�嚙賣�嚙賢��對蕭data��蹌要ull
+      
       if ((requestCode == CAMERA || requestCode == PHOTO ) && data != null)
       {
-         //嚙踐□嚙踝蕭�蕭�嚙線ri
+         
          Uri uri = data.getData();
          ContentResolver cr = this.getContentResolver();
                       
          try
          {
-         //�蕭嚙踝蕭�蕭�嚙踝蕭�冪Bitmap
-         Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-
-         //嚙賣�謘蕭�蕭嚙賜捂撣蕭�穿蕭嚙踝蹌哨蕭皜賂蕭��蕭��
-         //ScalePic嚙賣�謘蕭謘橘蕭嚙質�蹓選蕭�蛛�穿蕭嚙�  
-         if(bitmap.getWidth()>bitmap.getHeight())ScalePic(bitmap,
-                                                          mPhone.heightPixels);
-         else ScalePic(bitmap,mPhone.widthPixels);
+	         Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+	           
+	         if(bitmap.getWidth()>bitmap.getHeight()) {
+	        	 Tool.scalePic(mImg,bitmap,mPhone.heightPixels);
+	         }                                                          
+	         else {
+	        	 Tool.scalePic(mImg,bitmap,mPhone.widthPixels);
+	         }
+	         
+	         picuri = uri ;
+	         
          } 
          catch (FileNotFoundException e)
          {
@@ -205,30 +219,8 @@ public class ChangePersondetail_1 extends Activity
       super.onActivityResult(requestCode, resultCode, data);
    }
         
-   private void ScalePic(Bitmap bitmap,int phone)
-   {
-      //�格��蕭嚙踐�頨恬蕭嚙�    
-	   float mScale = 1 ;
-                
-      //��嚙踝蕭謘橘蕭��瞍脫�啾�嚙踝�嚙賣��撞嚙踝嚙賡�潸嚙賣�嚙踝蕭銵�蕭嚙賣����抬蕭嚙踝�蕭隞ageView嚙踝蕭
-      if(bitmap.getWidth() > phone )
-      {
-         //嚙賣�謘�澗��伍�嚙�         mScale = (float)phone/(float)bitmap.getWidth();
-                      
-         Matrix mMat = new Matrix() ;
-         mMat.setScale(mScale, mScale);
-                          
-         Bitmap mScaleBitmap = Bitmap.createBitmap(bitmap,
-                                                   0,
-                                                   0,
-                                                   bitmap.getWidth(),
-                                                   bitmap.getHeight(),
-                                                   mMat,
-                                                   false);
-         mImg.setImageBitmap(mScaleBitmap);
-      }
-   else mImg.setImageBitmap(bitmap);
-   }
+
+   
    @Override
    protected Dialog onCreateDialog(int id) {
        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
