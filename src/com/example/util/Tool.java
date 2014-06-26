@@ -57,6 +57,17 @@ public class Tool {
 		return null ;
 	}
 	
+	//取得性別名稱函式
+	public static String getSexName(String num) {		
+		if("01".equals(num)) {
+			return "BOY" ;
+		}
+		else if("02".equals(num)) {
+			return "GIRL" ;
+		}
+		return null ;
+	}
+	
 	
 	//傳入圖片網址，回傳圖檔的 Bitmap , 須搭配 Handler or AsyncTask 使用
 	public static Bitmap get_bitmap(String picurl) {
