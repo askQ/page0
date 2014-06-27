@@ -56,6 +56,10 @@ public class PersondeiailFragment extends Fragment {
 
 	ProgressDialog progressDialog;
 	String picurl = null;
+	
+	String [] unfinish_question_id ;
+	String [] finish_question_id ;
+	
 
 	// 設定抓完圖片後進行UI切換圖片的處理
 	private Handler messageHandler = new Handler() {
@@ -118,7 +122,9 @@ public class PersondeiailFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v,
 					final int pos, long id) {
+				
 				Intent intent = new Intent();
+				intent.putExtra("questionid",unfinish_question_id[pos]) ;				
 				intent.setClass(getActivity(), MP16.class);
 				startActivity(intent);
 
@@ -132,7 +138,9 @@ public class PersondeiailFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v,
 					final int pos, long id) {
-				Intent intent = new Intent();
+								
+				Intent intent = new Intent();				 
+				intent.putExtra("questionid",finish_question_id[pos]) ;
 				intent.setClass(getActivity(), P19.class);
 				startActivity(intent);
 
@@ -164,8 +172,8 @@ public class PersondeiailFragment extends Fragment {
 
 				QuestionBean[] question = bean.getQuestion();
 
-				ArrayList<String> finish_question = new ArrayList<String>();
-				ArrayList<String> unfinish_question = new ArrayList<String>();
+				ArrayList<QuestionBean> finish_question = new ArrayList<QuestionBean>();
+				ArrayList<QuestionBean> unfinish_question = new ArrayList<QuestionBean>();
 
 				// 判斷是問過問題的話抓取資料
 
@@ -175,36 +183,42 @@ public class PersondeiailFragment extends Fragment {
 
 						for (int i = 0; i < question.length; i++) {
 
-							if (question[i].getFinishtime() != null) {
-								finish_question.add(URLDecoder.decode(
-										question[i].getTitle(), "utf-8"));
-							} else {
-								unfinish_question.add(URLDecoder.decode(
-										question[i].getTitle(), "utf-8"));
+							if (question[i].getFinishtime() != null) {								
+								finish_question.add(question[i]) ;
+							} else {								
+								unfinish_question.add(question[i]) ;
 							}
 						}
 
-						Object[] arr1 = unfinish_question.toArray();
-						Object[] arr2 = finish_question.toArray();
+						Object[] un_arr = unfinish_question.toArray();
+						Object[] fin_arr = finish_question.toArray();
 
-						String[] str1 = new String[arr1.length];
-						String[] str2 = new String[arr2.length];
-
-						for (int i = 0; i < arr1.length; i++) {
-							str1[i] = (String) arr1[i];
+						String[] str1 = new String[un_arr.length];
+						String[] str2 = new String[fin_arr.length];
+						
+						unfinish_question_id = new String[un_arr.length] ;
+						finish_question_id = new String[fin_arr.length] ;
+						
+						
+						//以下分別記錄問題之標題和 questionid
+						for (int i = 0; i < un_arr.length; i++) {
+							str1[i] = URLDecoder.decode( ((QuestionBean)un_arr[i]).getTitle() , "utf-8" ) ;							 
+							unfinish_question_id[i] = ((QuestionBean)un_arr[i]).getQuestionid() ; 
 						}
 
-						for (int i = 0; i < arr2.length; i++) {
-							str2[i] = (String) arr2[i];
+						for (int i = 0; i < fin_arr.length; i++) {
+							str2[i] = URLDecoder.decode( ((QuestionBean)fin_arr[i]).getTitle() , "utf-8" ) ;							
+							finish_question_id[i] = ((QuestionBean)fin_arr[i]).getQuestionid() ;
 						}
 
 						adapter = new ArrayAdapter<String>(getActivity(),
 								android.R.layout.simple_expandable_list_item_1,
 								str1);
+						
 						adapter2 = new ArrayAdapter<String>(getActivity(),
 								android.R.layout.simple_expandable_list_item_1,
 								str2);
-
+						
 						listView.setAdapter(adapter);
 						listView2.setAdapter(adapter2);
 					}
