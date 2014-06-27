@@ -2,7 +2,7 @@ package com.example.bean;
 
 public class QuestionBean {
 	
-	private String questioned ;
+	private String questionid ;
 	private String title ;
 	private String name  ;
 	private String buildtime ;
@@ -11,11 +11,11 @@ public class QuestionBean {
 	private String num_message ;
 	private TypeBean [] type  ;
 	
-	public String getQuestioned() {
-		return questioned;
+	public String getQuestionid() {
+		return questionid;
 	}
-	public void setQuestioned(String questioned) {
-		this.questioned = questioned;
+	public void setQuestionid(String questionid) {
+		this.questionid = questionid;
 	}
 	public String getTitle() {
 		return title;
