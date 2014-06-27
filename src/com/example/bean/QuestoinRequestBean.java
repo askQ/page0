@@ -2,14 +2,14 @@ package com.example.bean;
 
 public class QuestoinRequestBean extends AuthRequestBean {
 	
-	private String questioned ;
+	private String questionid ;
 
-	public String getQuestioned() {
-		return questioned;
+	public String getQuestionid() {
+		return questionid;
 	}
 
-	public void setQuestioned(String questioned) {
-		this.questioned = questioned;
+	public void setQuestioned(String questionid) {
+		this.questionid = questionid;
 	}
 	
 
