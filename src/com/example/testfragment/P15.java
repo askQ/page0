@@ -12,10 +12,9 @@ import info.androidhive.slidingmenu.Page4_MainActivity;
 import info.androidhive.slidingmenu.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
-import com.example.page_test_1.page3;
-import com.example.page_test_1.page_2_test;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +30,12 @@ import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.api.API_1;
+import com.example.api.API_1.OnFailListener;
+import com.example.api.API_1.OnSuccessListener;
+import com.example.bean.AskQuestionRequestBean;
+import com.example.util.Tool;
 
 public class P15 extends Activity {
 	ArrayList<MyObject> arrayList;
@@ -38,6 +43,37 @@ public class P15 extends Activity {
 	Gallery gallery;
     Myadapter adapter;
     TextView textview_title,textview_detail,textview_type,textview_sex,textview_finish; 
+
+    private String generate_typeid(String cloth, String date, String gift,
+			String gather, String threec, String other, String sex,
+			String makeup, String eat, String live, String entertain,
+			String girl, String boy) {
+		List<Integer> type_list = new ArrayList<Integer>();
+
+		//  if (cloth != null) type_list.add(object);
+		if (date != null) type_list.add(3);       //{"typeid":"3","name":"男女"},
+		if (gift != null) type_list.add(7);       //{"typeid":"7","name":"送禮"},
+		if (gather != null) type_list.add(6);     //{"typeid":"6","name":"聚會"},
+		if (threec != null) type_list.add(4);     //{"typeid":"4","name":"3C"},
+		// if (other != null) type_list.add(object);
+		if (sex != null) type_list.add(8);        //{"typeid":"8","name":"西斯"},
+		if (makeup != null) type_list.add(5);     //{"typeid":"5","name":"美妝"},
+		if (eat != null) type_list.add(9);        //{"typeid":"9","name":"美食"},
+		if (live != null) type_list.add(10);      //{"typeid":"10","name":"住宅"},
+		if (entertain != null) type_list.add(11); //{"typeid":"11","name":"娛樂"},
+		if (girl != null) type_list.add(2);       //{"typeid":"2","name":"女生"},
+		if (boy != null) type_list.add(1);        //{"typeid":"1","name":"男生"},
+
+		StringBuilder sb = new StringBuilder();
+		int list_length = type_list.size();
+		for (int i = 0; i < list_length; i++) {
+			sb.append(type_list.get(i));
+			if (i != list_length - 1)
+				sb.append(',');
+		}
+		return sb.toString();
+	}
+
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        // TODO Auto-generated method stub
@@ -60,22 +96,22 @@ public class P15 extends Activity {
 	         * 
 	         * */
 	        
-	        String title=(String)getIntent().getSerializableExtra("title");
-	        String detail=(String)getIntent().getSerializableExtra("detail");
-	        String cloth=(String)getIntent().getSerializableExtra("cloth");
-	        String date=(String)getIntent().getSerializableExtra("date");
-	        String gift=(String)getIntent().getSerializableExtra("gift");
-	        String gather=(String)getIntent().getSerializableExtra("gather");
-	        String threec=(String)getIntent().getSerializableExtra("3c");
-	        String other=(String)getIntent().getSerializableExtra("other");
-	        String sex=(String)getIntent().getSerializableExtra("sex");
-	        String makeup=(String)getIntent().getSerializableExtra("makeup");
-	        String eat=(String)getIntent().getSerializableExtra("eat");
-	        String live=(String)getIntent().getSerializableExtra("live");
-	        String entertain=(String)getIntent().getSerializableExtra("entertain");
-	        String girl=(String)getIntent().getSerializableExtra("girl");
-	        String boy=(String)getIntent().getSerializableExtra("boy");
-	        String finish_day=(String)getIntent().getSerializableExtra("finish_day");
+	        final String title=(String)getIntent().getSerializableExtra("title");
+	        final String detail=(String)getIntent().getSerializableExtra("detail");
+	        final String cloth=(String)getIntent().getSerializableExtra("cloth");
+	        final String date=(String)getIntent().getSerializableExtra("date");
+	        final String gift=(String)getIntent().getSerializableExtra("gift");
+	        final String gather=(String)getIntent().getSerializableExtra("gather");
+	        final String threec=(String)getIntent().getSerializableExtra("3c");
+	        final String other=(String)getIntent().getSerializableExtra("other");
+	        final String sex=(String)getIntent().getSerializableExtra("sex");
+	        final String makeup=(String)getIntent().getSerializableExtra("makeup");
+	        final String eat=(String)getIntent().getSerializableExtra("eat");
+	        final String live=(String)getIntent().getSerializableExtra("live");
+	        final String entertain=(String)getIntent().getSerializableExtra("entertain");
+	        final String girl=(String)getIntent().getSerializableExtra("girl");
+	        final String boy=(String)getIntent().getSerializableExtra("boy");
+	        final String finish_day=(String)getIntent().getSerializableExtra("finish_day");
 	        textview_sex= (TextView) findViewById(R.id.textView8);
 	        textview_sex.setText(girl+boy);
 	        textview_type= (TextView) findViewById(R.id.textView6);
@@ -100,13 +136,35 @@ public class P15 extends Activity {
 	  			
 	  			@Override
 	  			public void onClick(View arg0) {
-	  				Intent intent = new Intent();
-	  				intent.setClass(P15.this, Page4_MainActivity.class);
-	  				startActivity(intent); 
-	  			//	P15.this.finish(); 
-	  			}
-	  		});
-	        
+					Intent intent = new Intent();
+					intent.setClass(P15.this, Page4_MainActivity.class);
+					startActivity(intent);
+					// P15.this.finish();
+
+					AskQuestionRequestBean bean = new AskQuestionRequestBean();
+					bean.setSessionid(Tool.getSessionid());
+					bean.setTitle(title);
+					bean.setTypeid(generate_typeid(cloth, date, gift, gather, threec, other, sex, makeup, eat, live, entertain, girl, boy));
+					bean.setContent(detail);
+					bean.setEndtime(finish_day);
+
+					API_1 api = new API_1();
+					api.setOnSuccessListener(new OnSuccessListener() {
+						@Override
+						public void onSucess(JSONObject result) {
+							Log.d("test", result.toString());
+						}
+					});
+					api.setOnFailListener(new OnFailListener() {
+						@Override
+						public void onFail(String errorMsg) {
+							Log.e("test", errorMsg);
+						}
+					});
+					api.ask_question(bean);
+				}
+			});
+
 	    }
 	     public boolean onKeyDown(int keyCode,KeyEvent event){
 

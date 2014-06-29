@@ -18,6 +18,8 @@ import org.json.JSONObject;
 
 
 
+
+import com.example.bean.AskQuestionRequestBean;
 import com.example.bean.AuthRequestBean;
 import com.example.bean.MemberInfoRequestBean;
 import com.google.gson.Gson;
@@ -100,7 +102,17 @@ public class API_1 {
 		}		
 	}
 
-	
+	public void ask_question(AskQuestionRequestBean bean) {
+		Gson gson = new Gson() ;
+		try {
+			JSONObject obj = new JSONObject(gson.toJson(bean));
+			Task task = new Task() ;
+			task.execute(OP_ASK_QUESTION, obj.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static JSONObject sendRequest(String php, String dataString) throws Exception {
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost request = new HttpPost(serverURL + php);
