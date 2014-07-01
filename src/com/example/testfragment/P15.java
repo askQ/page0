@@ -21,7 +21,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -34,7 +36,9 @@ import android.widget.TextView;
 import com.example.api.API_1;
 import com.example.api.API_1.OnFailListener;
 import com.example.api.API_1.OnSuccessListener;
+import com.example.bean.AddChoiceRequestBean;
 import com.example.bean.AskQuestionRequestBean;
+import com.example.bean.ChoiceBean;
 import com.example.util.Tool;
 
 public class P15 extends Activity {
@@ -122,7 +126,7 @@ public class P15 extends Activity {
 	        textview_detail.setText(detail);
 	        textview_finish= (TextView) findViewById(R.id.textView10);
 	        textview_finish.setText(finish_day);
-	        ArrayList<MyObject> arrayList=(ArrayList<MyObject>)getIntent().getSerializableExtra("arrayList");
+	        final ArrayList<MyObject> arrayList=(ArrayList<MyObject>)getIntent().getSerializableExtra("arrayList");
 	        gallery =  (Gallery) findViewById(R.id.gallery);
 
     			        adapter = new Myadapter(getApplicationContext(), arrayList);
@@ -152,6 +156,45 @@ public class P15 extends Activity {
 					api.setOnSuccessListener(new OnSuccessListener() {
 						@Override
 						public void onSucess(JSONObject result) {
+
+							try {
+								ChoiceBean[] choiceBean_list = new ChoiceBean[arrayList.size()];
+								for (int i = 0; i < arrayList.size(); i++) {
+									ChoiceBean newChoiceBean = new ChoiceBean();
+									MyObject object = arrayList.get(i);
+									newChoiceBean.setTitle(object.titleFromEdittext);
+									newChoiceBean.setContent(object.DetailFromEdittext);
+									newChoiceBean.setPic(Tool.encode_to_base64(MediaStore.Images.Media.getBitmap(getContentResolver() , Uri.parse(object.UriFroFramgnet))));
+									newChoiceBean.setExtension("jpg");
+									choiceBean_list[i] = newChoiceBean;
+								}
+
+								AddChoiceRequestBean bean2 = new AddChoiceRequestBean();
+								bean2.setSessionid(Tool.getSessionid());
+								bean2.setQuestioned(result.getString("questionid"));
+								bean2.setChoice(choiceBean_list);
+
+								API_1 api2 = new API_1();
+								api2.setOnSuccessListener(new OnSuccessListener() {
+									@Override
+									public void onSucess(JSONObject result) {
+										Log.d("test", result.toString());
+									}
+								});
+								api2.setOnFailListener(new OnFailListener() {
+									@Override
+									public void onFail(String errorMsg) {
+										// TODO Auto-generated catch block
+										Log.d("test", errorMsg);
+									}
+								});
+								api2.add_choice(bean2);
+
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
 							Log.d("test", result.toString());
 						}
 					});

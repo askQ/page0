@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 
 
+
+import com.example.bean.AddChoiceRequestBean;
 import com.example.bean.AskQuestionRequestBean;
 import com.example.bean.AuthRequestBean;
 import com.example.bean.MemberInfoRequestBean;
@@ -108,6 +110,17 @@ public class API_1 {
 			JSONObject obj = new JSONObject(gson.toJson(bean));
 			Task task = new Task() ;
 			task.execute(OP_ASK_QUESTION, obj.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void add_choice(AddChoiceRequestBean bean) {
+		Gson gson = new Gson() ;
+		try {
+			JSONObject obj = new JSONObject(gson.toJson(bean));
+			Task task = new Task() ;
+			task.execute(OP_ADD_CHOICE, obj.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
