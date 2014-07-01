@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.util.Base64;
 import android.util.Log;
@@ -143,6 +144,25 @@ public class Tool {
 			e.printStackTrace();
 		}
 		return null ;
+	}
+	
+	private static int [] color = { Color.BLUE, Color.GREEN, Color.MAGENTA, Color.YELLOW, Color.CYAN } ; 
+	
+	//依照傳入的大小回傳對應的 color 陣列
+	public static int [] getColorArray(int num) {
+		
+		//保護機制
+		if(num > color.length) {
+			num = color.length ;
+		}
+		
+		int [] temp = new int[num] ;
+		
+		for(int i=0 ; i<num ; i++) {
+			temp[i] = color[i] ;
+		}
+		
+		return temp ;
 	}
 	
 	
