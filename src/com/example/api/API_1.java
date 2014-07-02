@@ -20,10 +20,12 @@ import org.json.JSONObject;
 
 
 
+
 import com.example.bean.AddChoiceRequestBean;
 import com.example.bean.AskQuestionRequestBean;
 import com.example.bean.AuthRequestBean;
 import com.example.bean.MemberInfoRequestBean;
+import com.example.bean.QuestoinRequestBean;
 import com.google.gson.Gson;
 
 import android.os.AsyncTask;
@@ -114,7 +116,7 @@ public class API_1 {
 			e.printStackTrace();
 		}
 	}
-
+		
 	public void add_choice(AddChoiceRequestBean bean) {
 		Gson gson = new Gson() ;
 		try {
@@ -125,8 +127,22 @@ public class API_1 {
 			e.printStackTrace();
 		}
 	}
+	
+	public void query_content(QuestoinRequestBean bean) {		
+		Gson gson = new Gson() ;	
+		try {			
+			JSONObject obj = new JSONObject(gson.toJson(bean)) ;			
+			Task task = new Task() ;
+			task.execute(OP_QUERY_CONTENT,obj.toString()) ;
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}		
+	}
 
 	private static JSONObject sendRequest(String php, String dataString) throws Exception {
+		
+		
+		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost request = new HttpPost(serverURL + php);
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
@@ -152,6 +168,8 @@ public class API_1 {
 
 		@Override
 		protected void onPostExecute(JSONObject result) {
+			
+			
 									
 			try {
 				if (result != null) {
