@@ -21,7 +21,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -34,7 +36,9 @@ import android.widget.TextView;
 import com.example.api.API_1;
 import com.example.api.API_1.OnFailListener;
 import com.example.api.API_1.OnSuccessListener;
+import com.example.bean.AddChoiceRequestBean;
 import com.example.bean.AskQuestionRequestBean;
+import com.example.bean.ChoiceBean;
 import com.example.util.Tool;
 
 public class P15 extends Activity {
@@ -73,6 +77,72 @@ public class P15 extends Activity {
 		}
 		return sb.toString();
 	}
+
+    private void add_choice(JSONObject ask_question_result) {
+    	try {
+			ChoiceBean[] choiceBean_list = new ChoiceBean[arrayList.size()];
+			for (int i = 0; i < arrayList.size(); i++) {
+				ChoiceBean newChoiceBean = new ChoiceBean();
+				MyObject object = arrayList.get(i);
+				newChoiceBean.setTitle(object.titleFromEdittext);
+				newChoiceBean.setContent(object.DetailFromEdittext);
+				newChoiceBean.setPic(Tool.encode_to_base64(
+						MediaStore.Images.Media.getBitmap(getContentResolver(),
+								Uri.parse(object.UriFroFramgnet))));
+				newChoiceBean.setExtension("jpg");
+				choiceBean_list[i] = newChoiceBean;
+			}
+
+			AddChoiceRequestBean bean = new AddChoiceRequestBean();
+			bean.setSessionid(Tool.getSessionid());
+			bean.setQuestioned(ask_question_result.getString("questionid"));
+			bean.setChoice(choiceBean_list);
+
+			API_1 api = new API_1();
+			api.setOnSuccessListener(new OnSuccessListener() {
+				@Override
+				public void onSucess(JSONObject result) {
+					Log.d("test", result.toString());
+				}
+			});
+			api.setOnFailListener(new OnFailListener() {
+				@Override
+				public void onFail(String errorMsg) {
+					Log.d("test", errorMsg);
+				}
+			});
+			api.add_choice(bean);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+
+    private void ask_question(String title, String typeid, String detail, String finish_day) {
+
+		AskQuestionRequestBean bean = new AskQuestionRequestBean();
+		bean.setSessionid(Tool.getSessionid());
+		bean.setTitle(title);
+		bean.setTypeid(typeid);
+		bean.setContent(detail);
+		bean.setEndtime(finish_day);
+
+		API_1 api = new API_1();
+		api.setOnSuccessListener(new OnSuccessListener() {
+			@Override
+			public void onSucess(JSONObject result) {
+				Log.d("test", result.toString());
+				add_choice(result);
+			}
+		});
+		api.setOnFailListener(new OnFailListener() {
+			@Override
+			public void onFail(String errorMsg) {
+				Log.e("test", errorMsg);
+			}
+		});
+		api.ask_question(bean);
+    }
 
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +192,7 @@ public class P15 extends Activity {
 	        textview_detail.setText(detail);
 	        textview_finish= (TextView) findViewById(R.id.textView10);
 	        textview_finish.setText(finish_day);
-	        ArrayList<MyObject> arrayList=(ArrayList<MyObject>)getIntent().getSerializableExtra("arrayList");
+	        arrayList=(ArrayList<MyObject>)getIntent().getSerializableExtra("arrayList");
 	        gallery =  (Gallery) findViewById(R.id.gallery);
 
     			        adapter = new Myadapter(getApplicationContext(), arrayList);
@@ -141,27 +211,10 @@ public class P15 extends Activity {
 					startActivity(intent);
 					// P15.this.finish();
 
-					AskQuestionRequestBean bean = new AskQuestionRequestBean();
-					bean.setSessionid(Tool.getSessionid());
-					bean.setTitle(title);
-					bean.setTypeid(generate_typeid(cloth, date, gift, gather, threec, other, sex, makeup, eat, live, entertain, girl, boy));
-					bean.setContent(detail);
-					bean.setEndtime(finish_day);
-
-					API_1 api = new API_1();
-					api.setOnSuccessListener(new OnSuccessListener() {
-						@Override
-						public void onSucess(JSONObject result) {
-							Log.d("test", result.toString());
-						}
-					});
-					api.setOnFailListener(new OnFailListener() {
-						@Override
-						public void onFail(String errorMsg) {
-							Log.e("test", errorMsg);
-						}
-					});
-					api.ask_question(bean);
+					String typeid = generate_typeid(cloth, date, gift, gather,
+							threec, other, sex, makeup, eat, live, entertain,
+							girl, boy);
+					ask_question(title, typeid, detail, finish_day);
 				}
 			});
 
