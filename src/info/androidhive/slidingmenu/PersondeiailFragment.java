@@ -3,6 +3,8 @@ package info.androidhive.slidingmenu;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -10,8 +12,12 @@ import com.example.api.API_1;
 import com.example.api.API_1.OnFailListener;
 import com.example.api.API_1.OnSuccessListener;
 import com.example.bean.AuthRequestBean;
+import com.example.bean.ChoiceBean;
+import com.example.bean.ContentResponseBean;
 import com.example.bean.MemberInfoResponseBean;
 import com.example.bean.QuestionBean;
+import com.example.bean.QuestoinRequestBean;
+import com.example.page_test_1.Page_test_1;
 import com.example.testfragment.P13;
 import com.example.util.Tool;
 import com.google.gson.Gson;
@@ -21,6 +27,7 @@ import com.view_my_Q.P19;
 import com.view_my_Q.P9;
 
 import android.R.string;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -38,6 +45,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -59,6 +67,8 @@ public class PersondeiailFragment extends Fragment {
 	
 	String [] unfinish_question_id ;
 	String [] finish_question_id ;
+	
+	Activity activity = null ; 
 	
 
 	// 設定抓完圖片後進行UI切換圖片的處理
@@ -84,7 +94,8 @@ public class PersondeiailFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		
+		
 		View rootView = inflater.inflate(R.layout.fragment_persondetail,
 				container, false);
 		name = (TextView) rootView.findViewById(R.id.txtLabel);
@@ -98,6 +109,9 @@ public class PersondeiailFragment extends Fragment {
 		changePersonDetail = (Button) rootView.findViewById(R.id.button2);
 		listView = (ListView) rootView.findViewById(R.id.listView1);
 		listView2 = (ListView) rootView.findViewById(R.id.listView2);
+		
+		activity = getActivity() ;
+		
 		changePersonDetail.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				Intent intent = new Intent();
@@ -115,18 +129,46 @@ public class PersondeiailFragment extends Fragment {
 		adapter2 = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_expandable_list_item_1, arr2);
 
-		listView.setAdapter(adapter);
+		listView.setAdapter(adapter);		
 
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
+		
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v,
 					final int pos, long id) {
 				
-				Intent intent = new Intent();
-				intent.putExtra("questionid",unfinish_question_id[pos]) ;				
-				intent.setClass(getActivity(), MP16.class);
-				startActivity(intent);
+				 API_1 api = new API_1() ;
+				 
+				 QuestoinRequestBean bean = new QuestoinRequestBean() ;		 
+				 bean.setQuestioned(unfinish_question_id[pos]);
+				 
+				 api.setOnSuccessListener(new OnSuccessListener() {
+						// 回傳成功之處理
+						@Override
+						public void onSucess(JSONObject result) {							
+							progressDialog.dismiss() ;							
+							Intent intent = new Intent();
+							intent.setClass(getActivity(), MP16.class);
+							intent.putExtra("QuestionContent",result.toString()) ;
+							startActivity(intent);
+						}
+					});
+
+					api.setOnFailListener(new OnFailListener() {
+						// 回傳失敗之處理
+						@Override
+						public void onFail(String errorMsg) {
+							progressDialog.dismiss();
+							Toast.makeText(activity,"查詢失敗", Toast.LENGTH_LONG).show();
+						}
+					});
+				
+				
+				api.query_content(bean);
+				
+				progressDialog.setTitle("查詢問題內容");
+				progressDialog.setMessage("處理中");
+				progressDialog.show();
 
 				return false;
 			}
@@ -138,12 +180,40 @@ public class PersondeiailFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v,
 					final int pos, long id) {
-								
-				Intent intent = new Intent();				 
-				intent.putExtra("questionid",finish_question_id[pos]) ;
-				intent.setClass(getActivity(), P19.class);
-				startActivity(intent);
+				
+				API_1 api = new API_1() ;
+				 
+				 QuestoinRequestBean bean = new QuestoinRequestBean() ;		 
+				 bean.setQuestioned(finish_question_id[pos]);
+				 
+				 api.setOnSuccessListener(new OnSuccessListener() {
+						// 回傳成功之處理
+						@Override
+						public void onSucess(JSONObject result) {							
+							progressDialog.dismiss() ;							
+							Intent intent = new Intent();
+							intent.setClass(getActivity(), P19.class);
+							intent.putExtra("QuestionContent",result.toString()) ;
+							startActivity(intent);
+						}
+					});
 
+					api.setOnFailListener(new OnFailListener() {
+						// 回傳失敗之處理
+						@Override
+						public void onFail(String errorMsg) {
+							progressDialog.dismiss();
+							Toast.makeText(activity,"查詢失敗", Toast.LENGTH_LONG).show();
+						}
+					});
+				
+				
+				api.query_content(bean);
+				
+				progressDialog.setTitle("查詢問題內容");
+				progressDialog.setMessage("處理中");
+				progressDialog.show();	
+				
 				return false;
 			}
 		});
