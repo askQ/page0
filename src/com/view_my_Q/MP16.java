@@ -100,20 +100,12 @@ public class MP16 extends Activity {
 	private int[] hot = {R.drawable.hot,R.drawable.hot,R.drawable.hot
     };
     private String[] title = {
-            "1choice_title","2choice_title","3choice_title"
+            "沒有發過問題"
     };
     private String[] detail = {
-            "1choice_detail","2_choice_detail","3_choice_detail"
+            ""
     };
    
-    private String[] name = {
-            "name1","name2","name3"
-    };
-    private String[] command = {
-            "command","command2","command3"
-    };
-    
-
     
     
 	@Override
@@ -167,25 +159,9 @@ public class MP16 extends Activity {
 			        });
 		
 				
-////
-		for (int i = 0; i < name.length; i++) {
-	            Map<String, Object> item_command = new HashMap<String, Object>();
-	           
-	            item_command.put("name", name[i]);
-	            item_command.put("command", command[i]);
-	       
-	            commands.add(item_command);
-	        }
-		
-		String[] command_item = new String[] {"name", "command" };
-	    int[] command_ViewID = new int[] {R.id.textView_name,R.id.textView_command};
-	        
-	    commandadapter = new SimpleAdapter(this, 
-	                commands, R.layout.listview_command, command_item,
-	                command_ViewID);
-		
+////		
 		command_list = (ListView) findViewById(R.id.list_for_command);
-		command_list.setAdapter(commandadapter);
+		
 ////		
 		
 		imageSwitcher = (ImageSwitcher)findViewById(R.id.image_switcher);
@@ -284,17 +260,42 @@ public class MP16 extends Activity {
 	            item.put("image", hot[i]);
 	            items.add(item);        
 			}
-						
 			
 			simpleAdapter = new SimpleAdapter(MP16.this,items, R.layout.listview_choice, ContentItem,ViewID);						
 			gallery.setAdapter(simpleAdapter);			
-		}		 
+		}
 		
+		
+		//針對抓取選項做準初始化
+		String[] command_item = new String[] {"name", "command" };
+	    int[] command_ViewID = new int[] {R.id.textView_name,R.id.textView_command};
+		
+		UserMessageBean [] usermessage = responseBean.getUser_message() ;
+		
+		if(usermessage!=null && usermessage.length>0) {
+			
+			for(int i=0 ; i<usermessage.length ; i++) {
 				
+				Map<String, Object> item_command = new HashMap<String, Object>();
+		           
+	            item_command.put("name", usermessage[i].getUsername());
+	            item_command.put("command", usermessage[i].getContent());
+	       
+	            commands.add(item_command);
+	            
+			}
+			
+			commandadapter = new SimpleAdapter(this, 
+	                commands, R.layout.listview_command, command_item,
+	                command_ViewID);
+			
+			command_list.setAdapter(commandadapter);
+			
+		}
+		
+		
 		 
 	}
-	
-	
 	
 	
 	public void selectFrag(View view) { 
