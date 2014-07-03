@@ -1,7 +1,9 @@
 package com.user_vote_pages;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.chart.PointStyle;
@@ -13,23 +15,59 @@ import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import com.example.bean.ChoiceBean;
+import com.example.bean.ContentResponseBean;
+import com.example.util.Tool;
+import com.google.gson.Gson;
+
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
 public class Fragment_B_only extends Fragment{
+	
+	double[] values = null ;
+	String [] titile = null ;
+    int[] color = null ;
+	
+	
 	@Override
 	   public View onCreateView(LayoutInflater inflater,
-	      ViewGroup container, Bundle savedInstanceState) {
-
+	      ViewGroup container, Bundle savedInstanceState) {	       
 	       
-	       double[] values = new double[] { 12, 14, 11, 10, 19 };
-	       int[] color = new int[] { Color.BLUE, Color.GREEN, Color.MAGENTA, Color.YELLOW, Color.CYAN };
+		
+    	   String questionContent = this.getActivity().getIntent().getStringExtra("QuestionContent") ;		 
+		   Gson gson = new Gson() ;			
+		   ContentResponseBean responseBean = gson.fromJson(questionContent,ContentResponseBean.class);
+		   
+		   ChoiceBean [] choice_arr = responseBean.getChoice() ;
+		   
+		   //假如有選項的情況,抓取內容
+		   if(choice_arr!=null && choice_arr.length>0) {
+			   
+			   values = new double[choice_arr.length] ;
+			   titile = new String[choice_arr.length] ;
+			   
+			   //建立選項標題,投票數陣列
+			   for(int i=0 ; i<choice_arr.length ; i++) {
+				   titile[i] = choice_arr[i].getTitle() ;
+				   values[i] = Double.parseDouble(choice_arr[i].getNum_boy()) ;				    
+			   }
+			   
+		   }
+		   else {
+			   values = new double[] { 0 };//here to change rate		       
+		       titile = new String[] {""} ;
+		   }
+		   
+		   color = Tool.getColorArray(values.length) ;		   
+		   
 
 	       DefaultRenderer  defaultRenderer =buildCategoryRenderer(color);
 	       CategorySeries  categorySeries =buildCategoryDataset("?", values);
@@ -55,12 +93,13 @@ public class Fragment_B_only extends Fragment{
 	     }
 	   
 	   protected CategorySeries buildCategoryDataset(String title, double[] values) {
+		   
 	       CategorySeries series = new CategorySeries(title);
-	       int k = 0;
-	       for (double value : values) {
-	         series.add("Project " + ++k, value);
+	       	       
+	       for(int i=0 ; i<values.length ; i++) {
+	    	   series.add(titile[i],values[i]); 
 	       }
-
+	       
 	       return series;
 	     }
 
