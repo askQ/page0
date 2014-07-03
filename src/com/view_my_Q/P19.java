@@ -23,11 +23,15 @@ package com.view_my_Q;
 
 import info.androidhive.slidingmenu.R;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.bean.ContentResponseBean;
+import com.google.gson.Gson;
 import com.user_vote_pages.Fragment_BG;
 import com.user_vote_pages.Fragment_B_only;
 import com.user_vote_pages.Fragment_G_only;
@@ -62,6 +66,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ViewSwitcher.ViewFactory;
 
 
+//已完成之問題
 public class P19 extends Activity {
 	ListView command_list;
 	Gallery gallery;
@@ -196,11 +201,33 @@ public class P19 extends Activity {
 		
 	    button_out.setOnClickListener(new Button.OnClickListener(){
 				public void onClick(View arg0) {
-	/*				Intent intent = new Intent();
+					/*
+	 				Intent intent = new Intent();
 					intent.setClass(P19.this, P18_mainactivity.class);
-					startActivity(intent); */
+					startActivity(intent); 
+					*/
 				}}
 				);
+	    
+	    //從 Intent 抓取問題的內容
+		 String questionContent = this.getIntent().getStringExtra("QuestionContent") ;		 
+		 Gson gson = new Gson() ;			
+		 ContentResponseBean responseBean = gson.fromJson(questionContent,ContentResponseBean.class);
+		 
+		 try {				
+				Title.setText("標題 :" + URLDecoder.decode(responseBean.getTitle(),"utf-8") );				
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		Detail.setText("內容 :" + responseBean.getContent());					
+		start_time.setText("發問時間:" + responseBean.getBuildtime());					
+		finish_time.setText("結束時間:" + responseBean.getEndtime());
+		
+		
+		 
+		 
 	}
 
 	public void selectFrag(View view) {
