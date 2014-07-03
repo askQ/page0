@@ -13,16 +13,6 @@ package com.view_my_Q;
 import info.androidhive.slidingmenu.PersondeiailFragment;
 import info.androidhive.slidingmenu.R;
 
-
-
-
-
-
-
-
-
-
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -50,6 +40,8 @@ import com.user_vote_pages.Fragment_G_only;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.annotation.SuppressLint;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
@@ -58,7 +50,9 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +60,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -99,13 +94,31 @@ public class MP16 extends Activity {
 		
 	private int[] hot = {R.drawable.hot,R.drawable.hot,R.drawable.hot
     };
+	
     private String[] title = {
-            "沒有發過問題"
+            "沒有發過選項"
     };
     private String[] detail = {
             ""
     };
-   
+    private String[] picurl = {
+            ""
+    };
+    
+    private Bitmap choice_Bitmap = null ;
+    
+    
+ // 設定抓完圖片後進行UI切換圖片的處理
+ 	private Handler messageHandler = new Handler() {
+ 		public void handleMessage(Message msg) {
+ 			switch (msg.what) {
+ 			case 0: 				
+ 				BitmapDrawable temp = new BitmapDrawable(choice_Bitmap) ; 				
+ 				imageSwitcher.setImageDrawable(temp); 
+ 				return;
+ 			} 			
+ 		}
+ 	};
     
     
 	@Override
@@ -152,7 +165,28 @@ public class MP16 extends Activity {
 		//上面的文字
 		gallery.setOnItemClickListener(new OnItemClickListener(){
 			          public void onItemClick(AdapterView parent, View view, int position, long id) {
-			        	   	imageSwitcher.setImageResource(hot[position]);
+			        	  
+			        	  final int temp_position = position ;
+			        	  
+			        	  	 if(picurl[position]!=null) {									
+									
+								new Thread() {
+									@Override
+									public void run() {
+										try {											
+											choice_Bitmap = Tool.get_bitmap(API_1.server_url
+													+ URLDecoder.decode(picurl[temp_position], "utf-8"));
+											messageHandler.sendEmptyMessage(0);
+											
+										} catch (UnsupportedEncodingException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}										
+									}
+			        	  		 }.start();			        	  		 
+			        	  		 
+			        	  		//imageSwitcher.setImageResource(hot[position]);
+			        	  	 }
 				          	 textswitcher.setText(title[position]);
 				        	 textswitcher1.setText(detail[position]); 
 			            }
@@ -251,12 +285,22 @@ public class MP16 extends Activity {
 		//假如有選項的情況,抓取內容
 		if(choice_arr!=null && choice_arr.length>0) {
 			
+			title = new String[choice_arr.length] ;
+			detail = new String[choice_arr.length] ;
+			picurl = new String[choice_arr.length] ; 
+			
 			items.clear() ;
 			
 			for(int i=0 ; i<choice_arr.length ; i++) {
+				
+				//塞入選樣資料到陣列
+				title[i] = choice_arr[i].getTitle() ;
+				detail[i] = choice_arr[i].getContent() ;
+				picurl[i] = choice_arr[i].getPicurl() ;
+				
 				Map<String, Object> item = new HashMap<String, Object>();
-				item.put("title", choice_arr[i].getTitle());
-				//item.put("detail", choice_arr[i].getContent());							
+				item.put("title", title[i]);
+				//item.put("detail", detail[i]);
 	            item.put("image", hot[i]);
 	            items.add(item);        
 			}
@@ -273,6 +317,7 @@ public class MP16 extends Activity {
 		UserMessageBean [] usermessage = responseBean.getUser_message() ;
 		
 		if(usermessage!=null && usermessage.length>0) {
+									
 			
 			for(int i=0 ; i<usermessage.length ; i++) {
 				
