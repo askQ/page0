@@ -7,9 +7,13 @@ public class ContentResponseBean extends ResponseBean {
 	private String choiceid ;
 	private String command ;
 	private String buildtime ;
-	private String endtime ;	
+	private String endtime ;
 	
-	private ChoiceBean [] choice ;	
+	
+	private ChoiceBean [] choice ;
+	
+	private UserMessageBean [] user_message ;
+	
 
 	public String getTitle() {
 		return title;
@@ -53,5 +57,13 @@ public class ContentResponseBean extends ResponseBean {
 	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
+	public UserMessageBean[] getUser_message() {
+		return user_message;
+	}
+	public void setUser_message(UserMessageBean[] user_message) {
+		this.user_message = user_message;
+	}
+	
+	
 
 }
