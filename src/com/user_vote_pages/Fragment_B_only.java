@@ -32,9 +32,9 @@ import android.view.ViewGroup;
 
 public class Fragment_B_only extends Fragment{
 	
-	double[] values = null ;
-	String [] titile = null ;
-    int[] color = null ;
+	double[] values = new double [] { 2, 14, 11, 10, 19 } ;
+	String [] titile = new String [] {"1","2","3","4","5"}  ;
+    int[] color =  new int[] { Color.BLUE, Color.GREEN, Color.MAGENTA, Color.YELLOW, Color.CYAN } ;
 	
 	
 	@Override
@@ -42,31 +42,36 @@ public class Fragment_B_only extends Fragment{
 	      ViewGroup container, Bundle savedInstanceState) {	       
 	       
 		
-    	   String questionContent = this.getActivity().getIntent().getStringExtra("QuestionContent") ;		 
-		   Gson gson = new Gson() ;			
-		   ContentResponseBean responseBean = gson.fromJson(questionContent,ContentResponseBean.class);
-		   
-		   ChoiceBean [] choice_arr = responseBean.getChoice() ;
-		   
-		   //假如有選項的情況,抓取內容
-		   if(choice_arr!=null && choice_arr.length>0) {
+    	   String questionContent = this.getActivity().getIntent().getStringExtra("QuestionContent") ;
+    	   
+    	   if(questionContent!=null) {
+    	   
+			   Gson gson = new Gson() ;			
+			   ContentResponseBean responseBean = gson.fromJson(questionContent,ContentResponseBean.class);
 			   
-			   values = new double[choice_arr.length] ;
-			   titile = new String[choice_arr.length] ;
+			   ChoiceBean [] choice_arr = responseBean.getChoice() ;
 			   
-			   //建立選項標題,投票數陣列
-			   for(int i=0 ; i<choice_arr.length ; i++) {
-				   titile[i] = choice_arr[i].getTitle() ;
-				   values[i] = Double.parseDouble(choice_arr[i].getNum_boy()) ;				    
+			   //假如有選項的情況,抓取內容
+			   if(choice_arr!=null && choice_arr.length>0) {
+				   
+				   values = new double[choice_arr.length] ;
+				   titile = new String[choice_arr.length] ;
+				   
+				   //建立選項標題,投票數陣列
+				   for(int i=0 ; i<choice_arr.length ; i++) {
+					   titile[i] = choice_arr[i].getTitle() ;
+					   values[i] = Double.parseDouble(choice_arr[i].getNum_boy()) ;				    
+				   }
+				   
+			   }
+			   else {
+				   values = new double[] { 0 };//here to change rate		       
+			       titile = new String[] {""} ;
 			   }
 			   
-		   }
-		   else {
-			   values = new double[] { 0 };//here to change rate		       
-		       titile = new String[] {""} ;
-		   }
+			   color = Tool.getColorArray(values.length) ;
 		   
-		   color = Tool.getColorArray(values.length) ;		   
+    	   }
 		   
 
 	       DefaultRenderer  defaultRenderer =buildCategoryRenderer(color);
