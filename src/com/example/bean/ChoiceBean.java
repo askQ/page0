@@ -3,6 +3,7 @@ package com.example.bean;
 public class ChoiceBean {
 	
 	//request會用到之攔位
+	private String choiceid ;
 	private String title ;
 	private String content ;
 	private String pic ;
@@ -62,6 +63,11 @@ public class ChoiceBean {
 	public void setNum_girl(String num_girl) {
 		this.num_girl = num_girl;
 	}
-	
+	public String getChoiceid() {
+		return choiceid;
+	}
+	public void setChoiceid(String choiceid) {
+		this.choiceid = choiceid;
+	}
 
 }
