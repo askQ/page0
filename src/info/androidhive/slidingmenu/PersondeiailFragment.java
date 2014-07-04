@@ -140,7 +140,7 @@ public class PersondeiailFragment extends Fragment {
 				 API_1 api = new API_1() ;
 				 
 				 QuestoinRequestBean bean = new QuestoinRequestBean() ;		 
-				 bean.setQuestioned(unfinish_question_id[pos]);
+				 bean.setQuestionid(unfinish_question_id[pos]);
 				 
 				 api.setOnSuccessListener(new OnSuccessListener() {
 						// 回傳成功之處理
@@ -150,6 +150,7 @@ public class PersondeiailFragment extends Fragment {
 							Intent intent = new Intent();
 							intent.setClass(getActivity(), MP16.class);
 							intent.putExtra("QuestionContent",result.toString()) ;
+							intent.putExtra("Questionid",unfinish_question_id[pos]) ;
 							startActivity(intent);
 						}
 					});
@@ -184,7 +185,7 @@ public class PersondeiailFragment extends Fragment {
 				API_1 api = new API_1() ;
 				 
 				 QuestoinRequestBean bean = new QuestoinRequestBean() ;		 
-				 bean.setQuestioned(finish_question_id[pos]);
+				 bean.setQuestionid(finish_question_id[pos]);
 				 
 				 api.setOnSuccessListener(new OnSuccessListener() {
 						// 回傳成功之處理
@@ -194,6 +195,7 @@ public class PersondeiailFragment extends Fragment {
 							Intent intent = new Intent();
 							intent.setClass(getActivity(), P19.class);
 							intent.putExtra("QuestionContent",result.toString()) ;
+							intent.putExtra("Questionid",finish_question_id[pos]) ;
 							startActivity(intent);
 						}
 					});

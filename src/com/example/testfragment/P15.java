@@ -95,7 +95,7 @@ public class P15 extends Activity {
 
 			AddChoiceRequestBean bean = new AddChoiceRequestBean();
 			bean.setSessionid(Tool.getSessionid());
-			bean.setQuestioned(ask_question_result.getString("questionid"));
+			bean.setQuestionid(ask_question_result.getString("questionid"));
 			bean.setChoice(choiceBean_list);
 
 			API_1 api = new API_1();

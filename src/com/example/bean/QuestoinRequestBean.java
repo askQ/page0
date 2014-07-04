@@ -8,7 +8,7 @@ public class QuestoinRequestBean extends AuthRequestBean {
 		return questionid;
 	}
 
-	public void setQuestioned(String questionid) {
+	public void setQuestionid(String questionid) {
 		this.questionid = questionid;
 	}
 	
