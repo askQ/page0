@@ -30,7 +30,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.api.API_1;
+import com.example.bean.ChoiceBean;
 import com.example.bean.ContentResponseBean;
+import com.example.bean.UserMessageBean;
+import com.example.util.Tool;
 import com.google.gson.Gson;
 import com.user_vote_pages.Fragment_BG;
 import com.user_vote_pages.Fragment_B_only;
@@ -38,6 +42,8 @@ import com.user_vote_pages.Fragment_G_only;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.annotation.SuppressLint;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
@@ -45,7 +51,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,21 +87,38 @@ public class P19 extends Activity {
 	ImageSwitcher imageSwitcher;
 	TextSwitcher textswitcher,textswitcher1;
 	SimpleAdapter simpleAdapter,commandadapter;
-	private int[] hot = {R.drawable.hot,R.drawable.hot,R.drawable.hot
-	};
-	private String[] title = {
-				"title1","titlee2","title3"
-				};
-	private String[] detail = {
-				"detail1","detail2","detail3"
-	};
+	
+	private int[] hot = {R.drawable.hot,R.drawable.hot,R.drawable.hot};
+	
+	private String[] title = { "並未決定選項" };
+	private String[] detail = { "" };
+	
+	private String [] picurl = { "" } ;
+	
 	private String[] name = {
-	            "name1","name2","name3"
+	            ""
 	    };
 	private String[] command = {
-	            "command","command2","command3"
+	            "目前沒有評論"
 	    };
-	int  choose=1;
+	
+	
+	private Bitmap choice_Bitmap = null ;
+	
+	// 設定抓完圖片後進行UI切換圖片的處理
+ 	private Handler messageHandler = new Handler() {
+ 		public void handleMessage(Message msg) {
+ 			switch (msg.what) {
+ 			case 0: 				
+ 				BitmapDrawable temp = new BitmapDrawable(choice_Bitmap) ; 				
+ 				imageSwitcher.setImageDrawable(temp); 
+ 				return;
+ 			} 			
+ 		}
+ 	};
+	
+	
+	int  choose=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -113,11 +139,9 @@ public class P19 extends Activity {
 		text_review.setText("review ot asker show here");
 ////
 		for (int i = 0; i < name.length; i++) {
-			            Map<String, Object> item_command = new HashMap<String, Object>();
-			           
+			            Map<String, Object> item_command = new HashMap<String, Object>();			           
 			            item_command.put("name", name[i]);
-			            item_command.put("command", command[i]);
-			       
+			            item_command.put("command", command[i]);			       
 			            commands.add(item_command);
 			        }
 		String[] command_item = new String[] {"name", "command" };
@@ -135,8 +159,7 @@ public class P19 extends Activity {
 	            Map<String, Object> item = new HashMap<String, Object>();
 	            item.put("image", hot[i]);
 	            item.put("title", title[i]);
-	            item.put("detail", detail[i]);
-	       
+	            item.put("detail", detail[i]);	       
 	            items.add(item);
 	        }
 		 String[] ContentItem = new String[] { "image","title", "click" };
@@ -188,9 +211,9 @@ public class P19 extends Activity {
 		        return textView;
 		    }         
 		});
-		imageSwitcher.setImageResource(hot[choose]);
-    	 textswitcher.setText(title[choose]);
-        textswitcher1.setText(detail[choose]);
+		
+		
+        
 		textswitcher.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
 		textswitcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
 		textswitcher1.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
@@ -225,6 +248,77 @@ public class P19 extends Activity {
 		start_time.setText("發問時間:" + responseBean.getBuildtime());					
 		finish_time.setText("結束時間:" + responseBean.getEndtime());
 		
+		String choose_choiceid = responseBean.getChoiceid() ;
+		
+		ChoiceBean [] choice_arr = responseBean.getChoice() ;		
+		
+		//假如有選項的情況,抓取內容		
+		if(choice_arr!=null && choose_choiceid != null && choice_arr.length>0) {
+			
+			items.clear();
+			
+			for(int i=0 ; i<choice_arr.length ; i++) {
+				//找到使用者選的選項後,就開始塞資料
+				if(choose_choiceid.equals(choice_arr[i].getChoiceid())) {
+					title[choose] = choice_arr[i].getTitle() ;
+					detail[choose] = choice_arr[i].getContent() ;
+					picurl[choose] = choice_arr[i].getPicurl() ;
+					
+					Map<String, Object> item = new HashMap<String, Object>();
+					item.put("title", title[choose]);
+					//item.put("detail", detail[choose]);
+		            item.put("image", hot[choose]);
+		            items.add(item);
+		            
+		            if(picurl[choose]!=null && !"".equals(picurl[choose]) ) {
+		            	
+		            	new Thread() {
+							@Override
+							public void run() {
+								try {											
+									choice_Bitmap = Tool.get_bitmap(API_1.server_url
+											+ URLDecoder.decode(picurl[choose], "utf-8"));
+									messageHandler.sendEmptyMessage(0);
+									
+								} catch (UnsupportedEncodingException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}										
+							}
+	        	  		 }.start();		            	
+		            	
+		            }
+		            textswitcher.setText(title[choose]);
+		            textswitcher1.setText(detail[choose]);
+					break ;
+				}				      
+			}
+			simpleAdapter = new SimpleAdapter(this, 
+	                items, R.layout.listview_choice, ContentItem,
+	                ViewID);
+			gallery.setAdapter(simpleAdapter);			
+		}
+		
+		UserMessageBean [] usermessage = responseBean.getUser_message() ;
+		
+		if(usermessage!=null && usermessage.length>0) {
+			
+			commands.clear(); 
+			
+			for(int i=0 ; i<usermessage.length ; i++) {				
+				Map<String, Object> item_command = new HashMap<String, Object>();		           
+	            item_command.put("name", usermessage[i].getUsername());
+	            item_command.put("command", usermessage[i].getContent());	       
+	            commands.add(item_command); 
+			}
+			
+		}
+		
+		commandadapter = new SimpleAdapter(this, 
+                commands, R.layout.listview_command, command_item,
+                command_ViewID);
+		
+		command_list.setAdapter(commandadapter);
 		
 		 
 		 

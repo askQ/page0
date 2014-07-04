@@ -108,7 +108,7 @@ public class MP16 extends Activity {
     private Bitmap choice_Bitmap = null ;
     
     
- // 設定抓完圖片後進行UI切換圖片的處理
+    // 設定抓完圖片後進行UI切換圖片的處理
  	private Handler messageHandler = new Handler() {
  		public void handleMessage(Message msg) {
  			switch (msg.what) {
@@ -168,7 +168,7 @@ public class MP16 extends Activity {
 			        	  
 			        	  final int temp_position = position ;
 			        	  
-			        	  	 if(picurl[position]!=null) {									
+			        	  	 if(picurl[position]!=null && ! "".equals(picurl[position])) {									
 									
 								new Thread() {
 									@Override
@@ -301,7 +301,7 @@ public class MP16 extends Activity {
 				Map<String, Object> item = new HashMap<String, Object>();
 				item.put("title", title[i]);
 				//item.put("detail", detail[i]);
-	            item.put("image", hot[i]);
+	            //item.put("image", hot[i]);
 	            items.add(item);        
 			}
 			
@@ -321,11 +321,9 @@ public class MP16 extends Activity {
 			
 			for(int i=0 ; i<usermessage.length ; i++) {
 				
-				Map<String, Object> item_command = new HashMap<String, Object>();
-		           
+				Map<String, Object> item_command = new HashMap<String, Object>();		           
 	            item_command.put("name", usermessage[i].getUsername());
-	            item_command.put("command", usermessage[i].getContent());
-	       
+	            item_command.put("command", usermessage[i].getContent());	       
 	            commands.add(item_command);
 	            
 			}
