@@ -138,11 +138,21 @@ public class API_1 {
 			e.printStackTrace();
 		}		
 	}
+	
+	public void delete_question(QuestoinRequestBean bean) {
+		Gson gson = new Gson() ;	
+		try {			
+			JSONObject obj = new JSONObject(gson.toJson(bean)) ;			
+			Task task = new Task() ;
+			task.execute(OP_DELETE_QUESTION,obj.toString()) ;
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}		
+	}
 
 	private static JSONObject sendRequest(String php, String dataString) throws Exception {
 		
-		
-		
+				
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost request = new HttpPost(serverURL + php);
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
@@ -169,8 +179,7 @@ public class API_1 {
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			
-			
-									
+												
 			try {
 				if (result != null) {
 					if (result.getString("code").equals("0000")) {
