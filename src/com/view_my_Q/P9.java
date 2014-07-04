@@ -84,10 +84,10 @@ public class P9 extends Activity {
 	};
 	
 	private String[] name = {
-	            "name1","name2","name3"
+	            ""
 	    };
   private String[] command = {
-	            "command","command2","command3"
+	            "目前沒有評論"
 	    };
 	int  choose=0;
 

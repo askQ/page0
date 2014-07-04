@@ -257,15 +257,11 @@ public class MP16 extends Activity {
 				}}
 				);
 		 
-		 button_delete =(Button)findViewById(R.id.button_delete);
-		 button_delete.setOnClickListener(new Button.OnClickListener(){
-				public void onClick(View arg0) {					
-				}}
-				);
-		 
+		 		 
 		 
 		 //從 Intent 抓取問題的內容
 		 String questionContent = this.getIntent().getStringExtra("QuestionContent") ;		 
+		 final String questionid = this.getIntent().getStringExtra("Questionid") ;
 		 Gson gson = new Gson() ;			
 		 ContentResponseBean responseBean = gson.fromJson(questionContent,ContentResponseBean.class);
 
@@ -317,24 +313,63 @@ public class MP16 extends Activity {
 		UserMessageBean [] usermessage = responseBean.getUser_message() ;
 		
 		if(usermessage!=null && usermessage.length>0) {
-									
 			
-			for(int i=0 ; i<usermessage.length ; i++) {
-				
+			for(int i=0 ; i<usermessage.length ; i++) {				
 				Map<String, Object> item_command = new HashMap<String, Object>();		           
 	            item_command.put("name", usermessage[i].getUsername());
 	            item_command.put("command", usermessage[i].getContent());	       
-	            commands.add(item_command);
-	            
+	            commands.add(item_command);	            
 			}
-			
-			commandadapter = new SimpleAdapter(this, 
-	                commands, R.layout.listview_command, command_item,
-	                command_ViewID);
-			
-			command_list.setAdapter(commandadapter);
-			
 		}
+		else {
+			Map<String, Object> item_command = new HashMap<String, Object>();		           
+            item_command.put("name", "");
+            item_command.put("command","目前暫時沒有評論");	       
+            commands.add(item_command);	            
+		}
+		
+		commandadapter = new SimpleAdapter(this, 
+                commands, R.layout.listview_command, command_item,
+                command_ViewID);
+		
+		command_list.setAdapter(commandadapter);
+		
+		
+		button_delete =(Button)findViewById(R.id.button_delete);
+		
+		//進行刪除鍵按下動作
+		button_delete.setOnClickListener(new Button.OnClickListener(){			
+			public void onClick(View arg0) {
+				
+				QuestoinRequestBean bean = new QuestoinRequestBean() ;					
+				bean.setSessionid(Tool.getSessionid());
+				bean.setQuestionid(questionid);
+				
+				API_1 api = new API_1() ;
+				
+				 api.setOnSuccessListener(new OnSuccessListener() {
+						// 回傳成功之處理
+						@Override
+						public void onSucess(JSONObject result) {						
+							Toast.makeText(MP16.this,"刪除成功", Toast.LENGTH_LONG).show();
+							//這邊可以加入導回個人資料面面
+						}
+					});
+
+					api.setOnFailListener(new OnFailListener() {
+						// 回傳失敗之處理
+						@Override
+						public void onFail(String errorMsg) {							
+							Toast.makeText(MP16.this,"刪除失敗", Toast.LENGTH_LONG).show();
+						}
+					});
+					
+					api.delete_question(bean);
+					
+					Toast.makeText(MP16.this,"處理中..", Toast.LENGTH_SHORT).show();
+					
+			}}
+		);
 		
 		
 		 
